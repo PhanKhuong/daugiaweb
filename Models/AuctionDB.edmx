@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AuctionSiteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BannedUsers">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Evalutions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDuser" Type="nchar" MaxLength="10" />
+          <Property Name="Point" Type="float" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="FavoriteProducts">
+          <Key>
+            <PropertyRef Name="IDProducts" />
+            <PropertyRef Name="IDUsers" />
+          </Key>
+          <Property Name="IDProducts" Type="int" Nullable="false" />
+          <Property Name="IDUsers" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoryPrice">
+          <Key>
+            <PropertyRef Name="IDPro" />
+            <PropertyRef Name="IDUser" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="IDPro" Type="int" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDCat" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCat" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="LargeImg" Type="varchar" MaxLength="100" />
+          <Property Name="SmallImg_1" Type="varchar" MaxLength="100" />
+          <Property Name="SmallImg_2" Type="varchar" MaxLength="100" />
+          <Property Name="SmallImg_3" Type="varchar" MaxLength="100" />
+          <Property Name="StartPrice" Type="money" />
+          <Property Name="StepPrice" Type="money" />
+          <Property Name="EndPrice" Type="money" />
+          <Property Name="IntervalTime" Type="money" />
+          <Property Name="ExtendTime" Type="bit" />
+          <Property Name="EvalutionPoint" Type="float" />
+          <Property Name="HighestKeeper" Type="int" />
+          <Property Name="TimePost" Type="datetime" />
+          <Property Name="CurrentPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="ProductsInCharge">
+          <Key>
+            <PropertyRef Name="IDProducts" />
+            <PropertyRef Name="IDUsers" />
+          </Key>
+          <Property Name="IDProducts" Type="int" Nullable="false" />
+          <Property Name="IDUsers" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="Permission" Type="bit" />
+        </EntityType>
+        <EntityType Name="WonProducts">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AuctionSiteDBModelStoreContainer">
+          <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evalutions" EntityType="Self.Evalutions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FavoriteProducts" EntityType="Self.FavoriteProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryPrice" EntityType="Self.HistoryPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WonProducts" EntityType="Self.WonProducts" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuctionSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BannedUser">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Evalution">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDuser" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Point" Type="Double" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FavoriteProduct">
+          <Key>
+            <PropertyRef Name="IDProducts" />
+            <PropertyRef Name="IDUsers" />
+          </Key>
+          <Property Name="IDProducts" Type="Int32" Nullable="false" />
+          <Property Name="IDUsers" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoryPrice">
+          <Key>
+            <PropertyRef Name="IDPro" />
+            <PropertyRef Name="IDUser" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="IDPro" Type="Int32" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDCat" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCat" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LargeImg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SmallImg_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SmallImg_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SmallImg_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StartPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StepPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="EndPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IntervalTime" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ExtendTime" Type="Boolean" />
+          <Property Name="EvalutionPoint" Type="Double" />
+          <Property Name="HighestKeeper" Type="Int32" />
+          <Property Name="TimePost" Type="DateTime" Precision="3" />
+          <Property Name="CurrentPrice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="ProductsInCharge">
+          <Key>
+            <PropertyRef Name="IDProducts" />
+            <PropertyRef Name="IDUsers" />
+          </Key>
+          <Property Name="IDProducts" Type="Int32" Nullable="false" />
+          <Property Name="IDUsers" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Permission" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WonProduct">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Evalutions" EntityType="Self.Evalution" />
+          <EntitySet Name="FavoriteProducts" EntityType="Self.FavoriteProduct" />
+          <EntitySet Name="HistoryPrices" EntityType="Self.HistoryPrice" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductsInCharges" EntityType="Self.ProductsInCharge" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WonProducts" EntityType="Self.WonProduct" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AuctionSiteDBModelStoreContainer" CdmEntityContainer="AuctionSiteDBEntities">
+          <EntitySetMapping Name="BannedUsers">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.BannedUser">
+              <MappingFragment StoreEntitySet="BannedUsers">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evalutions">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.Evalution">
+              <MappingFragment StoreEntitySet="Evalutions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FavoriteProducts">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.FavoriteProduct">
+              <MappingFragment StoreEntitySet="FavoriteProducts">
+                <ScalarProperty Name="IDProducts" ColumnName="IDProducts" />
+                <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryPrices">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.HistoryPrice">
+              <MappingFragment StoreEntitySet="HistoryPrice">
+                <ScalarProperty Name="IDPro" ColumnName="IDPro" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDCat" ColumnName="IDCat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LargeImg" ColumnName="LargeImg" />
+                <ScalarProperty Name="SmallImg_1" ColumnName="SmallImg_1" />
+                <ScalarProperty Name="SmallImg_2" ColumnName="SmallImg_2" />
+                <ScalarProperty Name="SmallImg_3" ColumnName="SmallImg_3" />
+                <ScalarProperty Name="StartPrice" ColumnName="StartPrice" />
+                <ScalarProperty Name="StepPrice" ColumnName="StepPrice" />
+                <ScalarProperty Name="EndPrice" ColumnName="EndPrice" />
+                <ScalarProperty Name="IntervalTime" ColumnName="IntervalTime" />
+                <ScalarProperty Name="ExtendTime" ColumnName="ExtendTime" />
+                <ScalarProperty Name="EvalutionPoint" ColumnName="EvalutionPoint" />
+                <ScalarProperty Name="HighestKeeper" ColumnName="HighestKeeper" />
+                <ScalarProperty Name="TimePost" ColumnName="TimePost" />
+                <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductsInCharges">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.ProductsInCharge">
+              <MappingFragment StoreEntitySet="ProductsInCharge">
+                <ScalarProperty Name="IDProducts" ColumnName="IDProducts" />
+                <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WonProducts">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.WonProduct">
+              <MappingFragment StoreEntitySet="WonProducts">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

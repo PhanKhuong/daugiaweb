@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuctionSiteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BannedUsers">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+      <PropertyRef Name="IDUser" />
+    </Key>
+    <Property Name="IDProduct" Type="int" Nullable="false" />
+    <Property Name="IDUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Evalutions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDuser" Type="nchar" MaxLength="10" />
+    <Property Name="Point" Type="float" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="FavoriteProducts">
+    <Key>
+      <PropertyRef Name="IDProducts" />
+      <PropertyRef Name="IDUsers" />
+    </Key>
+    <Property Name="IDProducts" Type="int" Nullable="false" />
+    <Property Name="IDUsers" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HistoryPrice">
+    <Key>
+      <PropertyRef Name="IDPro" />
+      <PropertyRef Name="IDUser" />
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="IDPro" Type="int" Nullable="false" />
+    <Property Name="IDUser" Type="int" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDCat" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCat" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="LargeImg" Type="varchar" MaxLength="100" />
+    <Property Name="SmallImg_1" Type="varchar" MaxLength="100" />
+    <Property Name="SmallImg_2" Type="varchar" MaxLength="100" />
+    <Property Name="SmallImg_3" Type="varchar" MaxLength="100" />
+    <Property Name="StartPrice" Type="money" />
+    <Property Name="StepPrice" Type="money" />
+    <Property Name="EndPrice" Type="money" />
+    <Property Name="IntervalTime" Type="money" />
+    <Property Name="ExtendTime" Type="bit" />
+    <Property Name="EvalutionPoint" Type="float" />
+    <Property Name="HighestKeeper" Type="int" />
+    <Property Name="TimePost" Type="datetime" />
+    <Property Name="CurrentPrice" Type="money" />
+  </EntityType>
+  <EntityType Name="ProductsInCharge">
+    <Key>
+      <PropertyRef Name="IDProducts" />
+      <PropertyRef Name="IDUsers" />
+    </Key>
+    <Property Name="IDProducts" Type="int" Nullable="false" />
+    <Property Name="IDUsers" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Username" Type="varchar" MaxLength="20" />
+    <Property Name="Password" Type="varchar" MaxLength="20" />
+    <Property Name="Permission" Type="bit" />
+  </EntityType>
+  <EntityType Name="WonProducts">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+      <PropertyRef Name="IDUser" />
+    </Key>
+    <Property Name="IDProduct" Type="int" Nullable="false" />
+    <Property Name="IDUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="AuctionSiteDBModelStoreContainer">
+    <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Evalutions" EntityType="Self.Evalutions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FavoriteProducts" EntityType="Self.FavoriteProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HistoryPrice" EntityType="Self.HistoryPrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WonProducts" EntityType="Self.WonProducts" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

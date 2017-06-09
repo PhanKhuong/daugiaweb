@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuctionSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BannedUser">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+      <PropertyRef Name="IDUser" />
+    </Key>
+    <Property Name="IDProduct" Type="Int32" Nullable="false" />
+    <Property Name="IDUser" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Evalution">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDuser" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Point" Type="Double" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FavoriteProduct">
+    <Key>
+      <PropertyRef Name="IDProducts" />
+      <PropertyRef Name="IDUsers" />
+    </Key>
+    <Property Name="IDProducts" Type="Int32" Nullable="false" />
+    <Property Name="IDUsers" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HistoryPrice">
+    <Key>
+      <PropertyRef Name="IDPro" />
+      <PropertyRef Name="IDUser" />
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="IDPro" Type="Int32" Nullable="false" />
+    <Property Name="IDUser" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDCat" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCat" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="LargeImg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SmallImg_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SmallImg_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SmallImg_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StartPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="StepPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="EndPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="IntervalTime" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ExtendTime" Type="Boolean" />
+    <Property Name="EvalutionPoint" Type="Double" />
+    <Property Name="HighestKeeper" Type="Int32" />
+    <Property Name="TimePost" Type="DateTime" Precision="3" />
+    <Property Name="CurrentPrice" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="ProductsInCharge">
+    <Key>
+      <PropertyRef Name="IDProducts" />
+      <PropertyRef Name="IDUsers" />
+    </Key>
+    <Property Name="IDProducts" Type="Int32" Nullable="false" />
+    <Property Name="IDUsers" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Permission" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="WonProduct">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+      <PropertyRef Name="IDUser" />
+    </Key>
+    <Property Name="IDProduct" Type="Int32" Nullable="false" />
+    <Property Name="IDUser" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Evalutions" EntityType="Self.Evalution" />
+    <EntitySet Name="FavoriteProducts" EntityType="Self.FavoriteProduct" />
+    <EntitySet Name="HistoryPrices" EntityType="Self.HistoryPrice" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductsInCharges" EntityType="Self.ProductsInCharge" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="WonProducts" EntityType="Self.WonProduct" />
+  </EntityContainer>
+</Schema>

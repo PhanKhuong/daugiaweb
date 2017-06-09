@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AuctionSiteDBModelStoreContainer" CdmEntityContainer="AuctionSiteDBEntities">
+    <EntitySetMapping Name="BannedUsers">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.BannedUser">
+        <MappingFragment StoreEntitySet="BannedUsers">
+          <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+          <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evalutions">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.Evalution">
+        <MappingFragment StoreEntitySet="Evalutions">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FavoriteProducts">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.FavoriteProduct">
+        <MappingFragment StoreEntitySet="FavoriteProducts">
+          <ScalarProperty Name="IDProducts" ColumnName="IDProducts" />
+          <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoryPrices">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.HistoryPrice">
+        <MappingFragment StoreEntitySet="HistoryPrice">
+          <ScalarProperty Name="IDPro" ColumnName="IDPro" />
+          <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDCat" ColumnName="IDCat" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LargeImg" ColumnName="LargeImg" />
+          <ScalarProperty Name="SmallImg_1" ColumnName="SmallImg_1" />
+          <ScalarProperty Name="SmallImg_2" ColumnName="SmallImg_2" />
+          <ScalarProperty Name="SmallImg_3" ColumnName="SmallImg_3" />
+          <ScalarProperty Name="StartPrice" ColumnName="StartPrice" />
+          <ScalarProperty Name="StepPrice" ColumnName="StepPrice" />
+          <ScalarProperty Name="EndPrice" ColumnName="EndPrice" />
+          <ScalarProperty Name="IntervalTime" ColumnName="IntervalTime" />
+          <ScalarProperty Name="ExtendTime" ColumnName="ExtendTime" />
+          <ScalarProperty Name="EvalutionPoint" ColumnName="EvalutionPoint" />
+          <ScalarProperty Name="HighestKeeper" ColumnName="HighestKeeper" />
+          <ScalarProperty Name="TimePost" ColumnName="TimePost" />
+          <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsInCharges">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.ProductsInCharge">
+        <MappingFragment StoreEntitySet="ProductsInCharge">
+          <ScalarProperty Name="IDProducts" ColumnName="IDProducts" />
+          <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WonProducts">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.WonProduct">
+        <MappingFragment StoreEntitySet="WonProducts">
+          <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+          <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
