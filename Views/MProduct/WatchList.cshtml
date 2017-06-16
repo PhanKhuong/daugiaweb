@@ -1,1 +1,55 @@
-﻿
+﻿@using AuctionWeb.Models;
+
+@model List<ProductVM>
+
+@section view_title{
+    Watched List    
+}
+
+@section js {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#watchlisttable').DataTable();
+        });
+    </script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
+}
+
+@section css {
+    <link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+}
+
+<table id="watchlisttable" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>View Details</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>View Details</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td><img src="~/Img/products/@p.ID/main2.jpg" height="180" width="240" /></td>
+                <td>@Html.Raw(HttpUtility.HtmlDecode(p.Description))</td>
+                <td>
+                    <a href="@Url.Action("Details", "Products", new {id = @p.ID })" class=" btn btn-success" role="button">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

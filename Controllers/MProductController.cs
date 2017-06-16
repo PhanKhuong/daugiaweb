@@ -7,19 +7,21 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AuctionWeb.Helpers;
 
 namespace AuctionWeb.Controllers
 {
-    [CheckLogin(RequiredPermission=1)]
     public class MProductController : Controller
     {
         // GET: MProduct
+        [CheckLogin(RequiredPermission = 1)]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: MProduct/Add
+        [CheckLogin(RequiredPermission = 1)]
         public ActionResult Add()
         {
             using (var ctx = new AuctionSiteDBEntities())
@@ -32,6 +34,7 @@ namespace AuctionWeb.Controllers
         }
         
         [HttpPost]
+        [CheckLogin(RequiredPermission = 1)]
         public ActionResult Add(Product vm, HttpPostedFileBase Firstimg, HttpPostedFileBase Secondimg
             , HttpPostedFileBase Thirdimg)
         {
@@ -69,11 +72,14 @@ namespace AuctionWeb.Controllers
         }
 
         // GET: MProduct/InTime
+        [CheckLogin(RequiredPermission = 1)]
         public ActionResult InTime()
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
-                var list = ctx.Products.Where(p => (DateTime.Now <= EntityFunctions.AddDays(p.TimePost, p.IntervalTime)))
+                int Iduser = CurrentContext.GetCurUser().ID;
+                var list = ctx.Products.Where(p => ((p.UserID == Iduser) 
+                && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost, p.IntervalTime))))
                 .ToList();
                 return View(list);
             }          
@@ -82,7 +88,54 @@ namespace AuctionWeb.Controllers
         // GET: MProduct/WatchedList
         public ActionResult WatchList()
         {
-            return View();
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var iduser = CurrentContext.GetCurUser().ID;
+                var list = (from p in ctx.Products
+                            join f in ctx.FavoriteProducts
+                            on p.ID equals f.IDProducts
+                            where f.IDUsers == iduser
+                            select new ProductVM
+                            {
+                                ID = p.ID,
+                                IDCat = p.IDCat,
+                                Name = p.Name,
+                                Description = p.Description,
+                                StartPrice = p.StartPrice,
+                                StepPrice = p.StepPrice,
+                                EndPrice = p.EndPrice,
+                                IntervalTime = p.IntervalTime,
+                                ExtendTime = p.ExtendTime,
+                                EvaluationPoint = p.EvaluationPoint,
+                                HighestKeeper = p.HighestKeeper,
+                                TimePost = p.TimePost,
+                                CurrentPrice = p.CurrentPrice,
+                                UserID = p.UserID,
+                                Bought = p.Bought,
+                            }).ToList();
+
+                return View(list);
+            }
+        }
+
+        // POST: MProduct/WatchedList
+        [HttpPost]
+        public ActionResult WatchList(Product vm)
+        {           
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var iduser = CurrentContext.GetCurUser().ID;
+                var fr = new FavoriteProduct()
+                {
+                    IDProducts = vm.ID,
+                    IDUsers = iduser,
+                    
+                };
+
+                ctx.FavoriteProducts.Add(fr);
+                ctx.SaveChanges();
+            }
+            return RedirectToAction("Index","Home");
         }
     }
 }
