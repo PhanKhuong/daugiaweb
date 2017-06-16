@@ -1,0 +1,53 @@
+﻿@using AuctionWeb.Models
+
+@model List<Product>
+
+@section view_title {
+    Products Available
+}
+
+@section js {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#availablepros').DataTable();
+        });
+    </script>
+<script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
+<script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
+}
+
+@section css {
+<link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+}
+ 
+
+<table id="availablepros" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td><img src="~/Img/products/@p.ID/main2.jpg" height="180" width="240" /></td>
+                <td>
+                    <a href="@Url.Action("Details", "Products", new {id = @p.ID })" class=" btn btn-success" role="button">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

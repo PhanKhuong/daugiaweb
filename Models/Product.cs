@@ -18,18 +18,16 @@ namespace AuctionWeb.Models
         public int IDCat { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string LargeImg { get; set; }
-        public string SmallImg_1 { get; set; }
-        public string SmallImg_2 { get; set; }
-        public string SmallImg_3 { get; set; }
         public Nullable<decimal> StartPrice { get; set; }
         public Nullable<decimal> StepPrice { get; set; }
         public Nullable<decimal> EndPrice { get; set; }
-        public Nullable<decimal> IntervalTime { get; set; }
+        public int IntervalTime { get; set; }
         public Nullable<bool> ExtendTime { get; set; }
-        public Nullable<double> EvalutionPoint { get; set; }
+        public Nullable<double> EvaluationPoint { get; set; }
         public Nullable<int> HighestKeeper { get; set; }
-        public Nullable<System.DateTime> TimePost { get; set; }
+        public System.DateTime TimePost { get; set; }
         public Nullable<decimal> CurrentPrice { get; set; }
+        public int UserID { get; set; }
+        public Nullable<bool> Bought { get; set; }
     }
 }

@@ -1,0 +1,150 @@
+﻿@using BotDetect.Web.Mvc;
+
+@section view_title {
+    Register
+}
+
+@section css {
+    <style type="text/css">
+        label {
+            font-weight: normal !important;
+        }
+
+    </style>
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+}
+
+@section js {
+    <script src="~/Assets/jquery_validation/jquery.validate.js"></script>
+    <script type="text/javascript">
+        $('#frmRegister').validate({
+            rules: {
+                f_Username: {
+                    required: true,
+                    minlength: 6
+                },
+                f_RawPassword: {
+                    required: true,
+                    minlength: 6
+                },
+                f_Name: {
+                    required: true
+                },
+                f_Address: {
+                    required: true
+                },
+                f_Email: {
+                    required: true,
+                    email: true
+                },
+                f_DOB: {
+                    required: true
+                },
+                f_RawPasswordAgain: {
+                    required: true,
+                    equalTo: '#id_password'
+                }
+            },
+
+            messages: {
+                f_Username: {
+                    required: 'Please input your username',
+                    minlength: 'Username must has at least 6 characters'
+                },
+                f_RawPassword: {
+                    required: 'Please input your password',
+                    minlength: 'password must has at least 6 characters',
+                },
+                f_RawPasswordAgain: {
+                    required: 'Please type your password again',
+                    equalTo: 'Two types must be the same'
+                },
+                f_Name: {
+                    required: 'Please input your name'
+                },
+                f_Address: {
+                    required: 'Please input your address'
+                },
+                f_Email: {
+                    required: 'Please input your email',
+                    email: 'Please input in correct format of email'
+                },
+                f_DOB: {
+                    required: 'Please input your birthday'
+                }
+            }
+        });
+    </script>
+}
+
+@if (ViewBag.ErrorMsg != null)
+{
+    <div class="alert alert-warning">
+        <strong>Warning!</strong> @ViewBag.ErrorMsg
+    </div>
+}
+
+<form class="form-horizontal" method="post" action="" id="frmRegister">
+    <div class="form-group">
+        <label for="fsfesfewf" class="col-sm-2 control-label">Username</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="tefxt" placeholder="Username" name="f_Username">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ffh" class="col-sm-2 control-label">Type Password</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="id_password" placeholder="Password" name="f_RawPassword">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ff" class="col-sm-2 control-label">Type Again</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="id_password" placeholder="Password" name="f_RawPasswordAgain">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="faf" class="col-sm-2 control-label">Full Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="fe" placeholder="Full Name" name="f_Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="faf" class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="fe" placeholder="Address" name="f_Address">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fgf" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inpdfutEdsamfedsail3" placeholder="Email" name="f_Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fdff" class="col-sm-2 control-label">Birthday</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inpdfutEdsfmfedsail3" placeholder="Birthday" name="f_DOB">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-6">
+            @{ 
+                var exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+                exampleCaptcha.Reset();
+             }
+            @Html.Captcha(exampleCaptcha)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="faf" class="col-sm-2 control-label">Captcha</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="fe" placeholder="Captcha" name="CaptchaCode">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">Register</button>
+        </div>
+    </div>
+</form>

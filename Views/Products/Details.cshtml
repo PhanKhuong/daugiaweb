@@ -1,0 +1,40 @@
+﻿@using AuctionWeb.Models
+
+@model Product
+
+@section view_title {
+    Details Of Products
+}
+
+@if (Model == null)
+{
+    <text>No Products Available</text>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="~/Img/products/@Model.ID/main.jpg" style="width:100%"/>
+            <img src="~/Img/products/@Model.ID/main2.jpg" style="width:100%" />
+            <img src="~/Img/products/@Model.ID/main3.jpg" style="width:100%" />
+        </div>
+        <div class="col-sm-6">
+            <p>Start Price: @Model.StartPrice</p>&nbsp;
+            <p>Step Price: @Model.StepPrice</p>&nbsp;
+            <p>End Price: @Model.EndPrice</p>&nbsp;
+            <p>Time of post: @Model.TimePost</p>&nbsp;
+            <p>Description: @Html.Raw(HttpUtility.HtmlDecode(Model.Description))</p>            
+        </div>
+        <div class="col-sm-2">
+            <form id="submit_watchlist" method="post" action="@Url.Action("WatchList","MProduct")">
+                <div class="form-group">
+                    <input value="@Model.ID" name="ID" hidden />
+                </div>
+                <div class="form-group">
+                    <input value="@Model.UserID" name="UserID" hidden />
+                </div>
+            </form>
+            <a id="ref_watchlist" class="btn btn-success">Add To Favorite</a>
+        </div>
+    </div>
+}

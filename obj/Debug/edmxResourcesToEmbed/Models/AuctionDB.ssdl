@@ -51,19 +51,17 @@
     <Property Name="IDCat" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" />
     <Property Name="Description" Type="varchar" MaxLength="500" />
-    <Property Name="LargeImg" Type="varchar" MaxLength="100" />
-    <Property Name="SmallImg_1" Type="varchar" MaxLength="100" />
-    <Property Name="SmallImg_2" Type="varchar" MaxLength="100" />
-    <Property Name="SmallImg_3" Type="varchar" MaxLength="100" />
     <Property Name="StartPrice" Type="money" />
     <Property Name="StepPrice" Type="money" />
     <Property Name="EndPrice" Type="money" />
-    <Property Name="IntervalTime" Type="money" />
+    <Property Name="IntervalTime" Type="int" Nullable="false" />
     <Property Name="ExtendTime" Type="bit" />
-    <Property Name="EvalutionPoint" Type="float" />
+    <Property Name="EvaluationPoint" Type="float" />
     <Property Name="HighestKeeper" Type="int" />
-    <Property Name="TimePost" Type="datetime" />
+    <Property Name="TimePost" Type="datetime" Nullable="false" />
     <Property Name="CurrentPrice" Type="money" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Bought" Type="bit" />
   </EntityType>
   <EntityType Name="ProductsInCharge">
     <Key>
@@ -78,20 +76,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="Address" Type="nvarchar" MaxLength="500" />
-    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Username" Type="varchar" MaxLength="20" />
-    <Property Name="Password" Type="varchar" MaxLength="20" />
-    <Property Name="Permission" Type="bit" />
-  </EntityType>
-  <EntityType Name="WonProducts">
-    <Key>
-      <PropertyRef Name="IDProduct" />
-      <PropertyRef Name="IDUser" />
-    </Key>
-    <Property Name="IDProduct" Type="int" Nullable="false" />
-    <Property Name="IDUser" Type="int" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="Permission" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="PointEvaluation" Type="float" />
   </EntityType>
   <EntityContainer Name="AuctionSiteDBModelStoreContainer">
     <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
@@ -102,6 +94,5 @@
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="WonProducts" EntityType="Self.WonProducts" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

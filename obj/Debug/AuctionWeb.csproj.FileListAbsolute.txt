@@ -49,3 +49,5 @@ c:\users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\Auc
 c:\users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\obj\Debug\AuctionWeb.csprojResolveAssemblyReference.cache
 c:\users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\obj\Debug\AuctionWeb.dll
 c:\users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\obj\Debug\AuctionWeb.pdb
+C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\bin\BotDetect.dll
+C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\bin\BotDetect.Web.Mvc.dll

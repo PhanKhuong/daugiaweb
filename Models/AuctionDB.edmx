@@ -56,19 +56,17 @@
           <Property Name="IDCat" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="LargeImg" Type="varchar" MaxLength="100" />
-          <Property Name="SmallImg_1" Type="varchar" MaxLength="100" />
-          <Property Name="SmallImg_2" Type="varchar" MaxLength="100" />
-          <Property Name="SmallImg_3" Type="varchar" MaxLength="100" />
           <Property Name="StartPrice" Type="money" />
           <Property Name="StepPrice" Type="money" />
           <Property Name="EndPrice" Type="money" />
-          <Property Name="IntervalTime" Type="money" />
+          <Property Name="IntervalTime" Type="int" Nullable="false" />
           <Property Name="ExtendTime" Type="bit" />
-          <Property Name="EvalutionPoint" Type="float" />
+          <Property Name="EvaluationPoint" Type="float" />
           <Property Name="HighestKeeper" Type="int" />
-          <Property Name="TimePost" Type="datetime" />
+          <Property Name="TimePost" Type="datetime" Nullable="false" />
           <Property Name="CurrentPrice" Type="money" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Bought" Type="bit" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -83,20 +81,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Address" Type="nvarchar" MaxLength="500" />
-          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Username" Type="varchar" MaxLength="20" />
-          <Property Name="Password" Type="varchar" MaxLength="20" />
-          <Property Name="Permission" Type="bit" />
-        </EntityType>
-        <EntityType Name="WonProducts">
-          <Key>
-            <PropertyRef Name="IDProduct" />
-            <PropertyRef Name="IDUser" />
-          </Key>
-          <Property Name="IDProduct" Type="int" Nullable="false" />
-          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Permission" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="PointEvaluation" Type="float" />
         </EntityType>
         <EntityContainer Name="AuctionSiteDBModelStoreContainer">
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
@@ -107,7 +99,6 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WonProducts" EntityType="Self.WonProducts" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -165,19 +156,17 @@
           <Property Name="IDCat" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="LargeImg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SmallImg_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SmallImg_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SmallImg_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="StartPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="StepPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="EndPrice" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="IntervalTime" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IntervalTime" Type="Int32" Nullable="false" />
           <Property Name="ExtendTime" Type="Boolean" />
-          <Property Name="EvalutionPoint" Type="Double" />
+          <Property Name="EvaluationPoint" Type="Double" />
           <Property Name="HighestKeeper" Type="Int32" />
-          <Property Name="TimePost" Type="DateTime" Precision="3" />
+          <Property Name="TimePost" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CurrentPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Bought" Type="Boolean" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -192,20 +181,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Permission" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="WonProduct">
-          <Key>
-            <PropertyRef Name="IDProduct" />
-            <PropertyRef Name="IDUser" />
-          </Key>
-          <Property Name="IDProduct" Type="Int32" Nullable="false" />
-          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Permission" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="PointEvaluation" Type="Double" />
         </EntityType>
         <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
@@ -216,7 +199,6 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsInCharges" EntityType="Self.ProductsInCharge" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="WonProducts" EntityType="Self.WonProduct" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -274,19 +256,17 @@
                 <ScalarProperty Name="IDCat" ColumnName="IDCat" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="LargeImg" ColumnName="LargeImg" />
-                <ScalarProperty Name="SmallImg_1" ColumnName="SmallImg_1" />
-                <ScalarProperty Name="SmallImg_2" ColumnName="SmallImg_2" />
-                <ScalarProperty Name="SmallImg_3" ColumnName="SmallImg_3" />
                 <ScalarProperty Name="StartPrice" ColumnName="StartPrice" />
                 <ScalarProperty Name="StepPrice" ColumnName="StepPrice" />
                 <ScalarProperty Name="EndPrice" ColumnName="EndPrice" />
                 <ScalarProperty Name="IntervalTime" ColumnName="IntervalTime" />
                 <ScalarProperty Name="ExtendTime" ColumnName="ExtendTime" />
-                <ScalarProperty Name="EvalutionPoint" ColumnName="EvalutionPoint" />
+                <ScalarProperty Name="EvaluationPoint" ColumnName="EvaluationPoint" />
                 <ScalarProperty Name="HighestKeeper" ColumnName="HighestKeeper" />
                 <ScalarProperty Name="TimePost" ColumnName="TimePost" />
                 <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Bought" ColumnName="Bought" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -302,20 +282,14 @@
             <EntityTypeMapping TypeName="AuctionSiteDBModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Permission" ColumnName="Permission" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WonProducts">
-            <EntityTypeMapping TypeName="AuctionSiteDBModel.WonProduct">
-              <MappingFragment StoreEntitySet="WonProducts">
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="PointEvaluation" ColumnName="PointEvaluation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

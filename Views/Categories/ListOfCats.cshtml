@@ -4,10 +4,12 @@
 
 @using AuctionWeb.Models;
 
-<ul class="list-group">
+<div class="list-group">
     @foreach (var c in Model)
-    {
-        <li class="list-group-item"><a href="@Url.Action("ByCat", "Products", new { id = @c.ID })">@c.Name</a></li>
-    }
-</ul>
+    {   
+        <a href="@Url.Action("ByCat", "Products", new {id = @c.ID })" class="list-group-item">
+            @c.Name
+        </a>
+    }   
+</div>
 
