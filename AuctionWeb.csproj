@@ -701,6 +701,7 @@
     <Content Include="Assets\tinymce\langs\readme.md" />
     <Content Include="Views\MProduct\Index.cshtml" />
     <Content Include="Views\MProduct\InTime.cshtml" />
+    <Content Include="Views\MProduct\WatchList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
