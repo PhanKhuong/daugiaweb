@@ -65,9 +65,17 @@
                                 <ul class="dropdown-menu">
                                     @if (CurrentContext.GetCurUser().Permission == 0)
                                     {
-                                        <li id="askpermission"><a href="@Url.Action("Profile","Account")">Ask For Selling in 7 days</a></li>
+                                        <li id="askpermission"><a href="javascript:;">Ask For Selling in 7 days</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="@Url.Action("Profile","Account")">User Information</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
+                                    }
+                                    else if ((CurrentContext.GetCurUser().Permission) == 1 && (CurrentContext.GetCurUser().Username.Equals("thekhuong") == true))
+                                    {
+                                        <li><a href="@Url.Action("WaitingUsers","MAccount")">Manage Selling Asking</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("Delete","MAccount")">Delete Users</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a id="logoutLink" href="javascript:;">Logout</a></li>
                                     }
@@ -79,7 +87,7 @@
                                         <li role="separator" class="divider"></li>
                                         <li><a id="logoutLink" href="javascript:;">Logout</a></li>
                                     }
-                                    
+
                                 </ul>
                             </li>
                     }
@@ -118,9 +126,12 @@
             $('#submit_watchlist').submit();
         });
         $('#askpermission').on('click', function () {
-            alert("nam o day");
+            $('#submit_askpermission').submit();
         });
     </script>
+    <!--ask permission form-->
+    <form id="submit_askpermission" method="post" action="@Url.Action("AskPermission","MAccount")"></form>
+    <!---->
     @RenderSection("js", false)
 </body>
 </html>

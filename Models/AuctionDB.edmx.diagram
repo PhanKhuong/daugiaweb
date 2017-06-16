@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aeda5cf6a7c143ceadfbd59425ae53b0" Name="Diagram1">
+      <Diagram DiagramId="d4157dbe06644054b3943d895c1b6b0b" Name="Diagram1">
         <EntityTypeShape EntityType="AuctionSiteDBModel.BannedUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionSiteDBModel.Category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionSiteDBModel.Evalution" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="AuctionSiteDBModel.Product" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionSiteDBModel.ProductsInCharge" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionSiteDBModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionSiteDBModel.UsersAsking" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

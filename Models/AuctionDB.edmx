@@ -90,6 +90,17 @@
           <Property Name="DOB" Type="datetime" />
           <Property Name="PointEvaluation" Type="float" />
         </EntityType>
+        <EntityType Name="UsersAsking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="AskingDate" Type="datetime" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityContainer Name="AuctionSiteDBModelStoreContainer">
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -99,6 +110,7 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersAsking" EntityType="Self.UsersAsking" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -190,6 +202,17 @@
           <Property Name="DOB" Type="DateTime" Precision="3" />
           <Property Name="PointEvaluation" Type="Double" />
         </EntityType>
+        <EntityType Name="UsersAsking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="AskingDate" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -199,6 +222,7 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsInCharges" EntityType="Self.ProductsInCharge" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UsersAskings" EntityType="Self.UsersAsking" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -290,6 +314,18 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="PointEvaluation" ColumnName="PointEvaluation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersAskings">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.UsersAsking">
+              <MappingFragment StoreEntitySet="UsersAsking">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="AskingDate" ColumnName="AskingDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

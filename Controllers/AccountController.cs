@@ -100,13 +100,12 @@ namespace AuctionWeb.Controllers
         [CheckLogin]
         public ActionResult Profile()
         {
-            if(CurrentContext.Islogged() == false)
+            if (CurrentContext.Islogged() == false)
             {
                 return RedirectToAction("Index", "Home");
             }
 
             return View();
         }
-
     }
 }

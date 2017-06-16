@@ -624,6 +624,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MAccountController.cs" />
     <Compile Include="Controllers\MProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\CheckLoginAttribute.cs" />
@@ -674,6 +675,9 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsersAsking.cs">
+      <DependentUpon>AuctionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -702,6 +706,9 @@
     <Content Include="Views\MProduct\Index.cshtml" />
     <Content Include="Views\MProduct\InTime.cshtml" />
     <Content Include="Views\MProduct\WatchList.cshtml" />
+    <Content Include="Views\MAccount\AskPermission.cshtml" />
+    <Content Include="Views\MAccount\WaitingUsers.cshtml" />
+    <Content Include="Views\MAccount\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

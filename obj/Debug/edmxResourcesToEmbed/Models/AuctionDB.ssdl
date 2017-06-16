@@ -85,6 +85,17 @@
     <Property Name="DOB" Type="datetime" />
     <Property Name="PointEvaluation" Type="float" />
   </EntityType>
+  <EntityType Name="UsersAsking">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDUser" Type="int" />
+    <Property Name="AskingDate" Type="datetime" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Username" Type="varchar" MaxLength="20" />
+  </EntityType>
   <EntityContainer Name="AuctionSiteDBModelStoreContainer">
     <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -94,5 +105,6 @@
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersAsking" EntityType="Self.UsersAsking" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

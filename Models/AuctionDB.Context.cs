@@ -33,5 +33,6 @@ namespace AuctionWeb.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductsInCharge> ProductsInCharges { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UsersAsking> UsersAskings { get; set; }
     }
 }
