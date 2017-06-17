@@ -625,6 +625,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MAccountController.cs" />
+    <Compile Include="Controllers\MCategoriesController.cs" />
     <Compile Include="Controllers\MProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\CheckLoginAttribute.cs" />
@@ -709,6 +710,7 @@
     <Content Include="Views\MAccount\AskPermission.cshtml" />
     <Content Include="Views\MAccount\WaitingUsers.cshtml" />
     <Content Include="Views\MAccount\Delete.cshtml" />
+    <Content Include="Views\MCategories\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

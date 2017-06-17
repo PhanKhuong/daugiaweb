@@ -71,11 +71,13 @@
                                         <li role="separator" class="divider"></li>
                                         <li><a id="logoutLink" href="javascript:;">Logout</a></li>
                                     }
-                                    else if ((CurrentContext.GetCurUser().Permission) == 1 && (CurrentContext.GetCurUser().Username.Equals("thekhuong") == true))
+                                    else if ((CurrentContext.GetCurUser().Permission) == 1 && (CurrentContext.GetCurUser().Username.Equals("administrator") == true))
                                     {
                                         <li><a href="@Url.Action("WaitingUsers","MAccount")">Manage Selling Asking</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("Delete","MAccount")">Delete Users</a></li>
+                                        <li><a href="@Url.Action("Index","MCategories")">Manage Categories</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("Delete","MAccount")">Manage Users</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a id="logoutLink" href="javascript:;">Logout</a></li>
                                     }

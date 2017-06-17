@@ -1,0 +1,95 @@
+﻿@using AuctionWeb.Models;
+
+@section view_title{
+    Categories Management
+}
+
+@model List<Category>
+
+@section js {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#watchlisttable').DataTable();
+        });
+        $('.btn_edituser').on('click', function () {
+            $('.submit_edituser').submit();
+        });
+        $('.btn_edituser').on('click', function () {
+            $('.submit_deluser').submit();
+        });
+        $("#btn_adduser").click(function (e) {
+            $("#adduser").show();
+
+            e.preventDefault();
+        });
+    </script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
+}
+
+@section css {
+    <link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+}
+
+<table id="watchlisttable" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>
+                    <a href="javascript:;" class=" btn btn-success btn_edituser" role="button">
+                        Edit
+                    </a>
+                    <form class="submit_edituser" method="post" action="@Url.Action("Edit","MCategories")">
+                        <div class="form-group">
+                            <input value="@p.ID" name="ID" hidden />
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <a href="javascript:;" class=" btn btn-success btn_edituser" role="button">
+                        Delete
+                    </a>
+                    <form class="submit_deluser" method="post" action="@Url.Action("Delete","MCategories")">
+                        <div class="form-group">
+                            <input value="@p.ID" name="ID" hidden />
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a id="btn_adduser" href="javascript:;" class=" btn btn-success" role="button">
+    Add Categories 
+</a>
+
+<form id="adduser" method="post" action="@Url.Action("Add","MCategories")" hidden>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">New Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="New Name" name="Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
