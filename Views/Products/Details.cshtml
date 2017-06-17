@@ -10,6 +10,9 @@
 @section js{
 <script src="~/Assets/popup/popup.js"></script>
     <script type="text/javascript">
+        $('.edituser').on('click', function () {
+            $('.submit_edituser').submit();
+        });
         var slideIndex = 1;
         showDivs(slideIndex);
 
@@ -98,7 +101,7 @@ else
                     if ((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
                     {
                     <hr />
-                        <form  class="form-inline" method="post" action="@Url.Action("Index","Auction")">
+                        <form  class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction")">
                             <div class="form-group">
                                 <label class="col-sm-8 control-label">How much you could you pay for it?</label>
                                 <div class="col-sm-4">
@@ -117,8 +120,46 @@ else
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
+                                    <!---->
+                                    <div id="output"></div>
+
+                                    <div id="overlay" class="web_dialog_overlay"></div>
+
+                                    <div id="dialog" class="web_dialog">
+                                        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+                                            <tr>
+                                                <td class="web_dialog_title">Online Survey</td>
+                                                <td class="web_dialog_title align_right">
+                                                    <a href="#" id="btnClose">Close</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left: 15px;">
+                                                    <b>@recommend for this stuff????</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>                                     
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center;">
+                                                    <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!---->
                                 </div>                               
-                                </div>
+                            </div>
                         </form>
                 }
                 else
@@ -138,4 +179,3 @@ else
 
     </div>
 }
-
