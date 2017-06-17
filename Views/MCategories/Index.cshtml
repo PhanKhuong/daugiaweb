@@ -11,7 +11,7 @@
         $(document).ready(function () {
             $('#watchlisttable').DataTable();
         });
-        $('.btn_edituser').on('click', function () {
+        $('.edituser').on('click', function () {
             $('.submit_edituser').submit();
         });
         $('.btn_edituser').on('click', function () {
@@ -25,10 +25,12 @@
     </script>
     <script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
     <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
+    <script src="~/Assets/popup/popup.js"></script>
 }
 
 @section css {
     <link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+    <link href="~/Assets/popup/popup.css" rel="stylesheet" />
 }
 
 <table id="watchlisttable" class="display" cellspacing="0" width="100%">
@@ -52,14 +54,47 @@
             <tr>
                 <td>@p.Name</td>
                 <td>
-                    <a href="javascript:;" class=" btn btn-success btn_edituser" role="button">
+                    <a id="btnShowModal" value="Modal Dialog" href="" class=" btn btn-success" role="button">
                         Edit
                     </a>
-                    <form class="submit_edituser" method="post" action="@Url.Action("Edit","MCategories")">
-                        <div class="form-group">
-                            <input value="@p.ID" name="ID" hidden />
-                        </div>
-                    </form>
+                    <!---->
+                    <div id="output"></div>
+                    <div id="overlay" class="web_dialog_overlay"></div>
+                    <div id="dialog" class="web_dialog"> 
+                        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+                            <tr>
+                                <td class="web_dialog_title">Edit Category</td>
+                                <td class="web_dialog_title align_right">
+                                    <a href="#" id="btnClose">Close</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <!--edit form-->
+                                    <form class="submit_edituser" method="post" action="@Url.Action("Edit","MCategories")">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">New Name</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" placeholder="New Name" name="Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" hidden>
+                                            <div class="col-sm-4">
+                                                <input type="text" value="@p.ID" class="form-control" placeholder="New Name" name="ID">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <a id="btnSubmit" value="Submit" href="javascript:;" class=" btn btn-success edituser" role="button">
+                                        Save
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>                        
+                    </div>                       
                 </td>
                 <td>
                     <a href="javascript:;" class=" btn btn-success btn_edituser" role="button">

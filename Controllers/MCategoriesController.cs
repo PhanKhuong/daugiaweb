@@ -1,4 +1,5 @@
 ﻿using AuctionWeb.Filters;
+using AuctionWeb.Helpers;
 using AuctionWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -40,12 +41,15 @@ namespace AuctionWeb.Controllers
 
         // Post: MCategories/Edit
         [HttpPost]
-        public ActionResult Edit()
+        public ActionResult Edit(Category vm)
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
                 var list = ctx.Categories.ToList();
-                return View(list);
+                Category CattoUpdate = list.Where(c => c.ID == vm.ID).FirstOrDefault<Category>();
+                CattoUpdate.Name = vm.Name;
+                ctx.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
         }
 
