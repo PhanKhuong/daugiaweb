@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="AuctionSiteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPro" Type="int" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="MaxPrice" Type="money" />
+          <Property Name="own" Type="bit" />
+        </EntityType>
         <EntityType Name="BannedUsers">
           <Key>
             <PropertyRef Name="IDProduct" />
@@ -67,6 +80,8 @@
           <Property Name="CurrentPrice" Type="money" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Bought" Type="bit" />
+          <Property Name="PriceDisplay" Type="money" />
+          <Property Name="PlusTime" Type="int" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -88,7 +103,8 @@
           <Property Name="Permission" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="DOB" Type="datetime" />
-          <Property Name="PointEvaluation" Type="float" />
+          <Property Name="negativePoint" Type="float" Nullable="false" />
+          <Property Name="positivePoint" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="UsersAsking">
           <Key>
@@ -102,6 +118,7 @@
           <Property Name="Username" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityContainer Name="AuctionSiteDBModelStoreContainer">
+          <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evalutions" EntityType="Self.Evalutions" Schema="dbo" store:Type="Tables" />
@@ -117,6 +134,19 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuctionSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPro" Type="Int32" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="own" Type="Boolean" />
+        </EntityType>
         <EntityType Name="BannedUser">
           <Key>
             <PropertyRef Name="IDProduct" />
@@ -179,6 +209,8 @@
           <Property Name="CurrentPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Bought" Type="Boolean" />
+          <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PlusTime" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -200,7 +232,8 @@
           <Property Name="Permission" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DOB" Type="DateTime" Precision="3" />
-          <Property Name="PointEvaluation" Type="Double" />
+          <Property Name="negativePoint" Type="Double" Nullable="false" />
+          <Property Name="positivePoint" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="UsersAsking">
           <Key>
@@ -214,6 +247,7 @@
           <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auctions" EntityType="Self.Auction" />
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Evalutions" EntityType="Self.Evalution" />
@@ -230,6 +264,20 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AuctionSiteDBModelStoreContainer" CdmEntityContainer="AuctionSiteDBEntities">
+          <EntitySetMapping Name="Auctions">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.Auction">
+              <MappingFragment StoreEntitySet="Auction">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDPro" ColumnName="IDPro" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="own" ColumnName="own" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BannedUsers">
             <EntityTypeMapping TypeName="AuctionSiteDBModel.BannedUser">
               <MappingFragment StoreEntitySet="BannedUsers">
@@ -291,6 +339,8 @@
                 <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Bought" ColumnName="Bought" />
+                <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
+                <ScalarProperty Name="PlusTime" ColumnName="PlusTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -313,7 +363,8 @@
                 <ScalarProperty Name="Permission" ColumnName="Permission" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="PointEvaluation" ColumnName="PointEvaluation" />
+                <ScalarProperty Name="negativePoint" ColumnName="negativePoint" />
+                <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

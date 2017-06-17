@@ -78,6 +78,8 @@ namespace AuctionWeb.Controllers
 
                 User u = new User
                 {
+                    positivePoint = 0,
+                    negativePoint = 0,
                     Username = model.f_Username,
                     Email = model.f_Email,
                     Name = model.f_Name,

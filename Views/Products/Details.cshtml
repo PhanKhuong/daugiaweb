@@ -1,9 +1,46 @@
 ﻿@using AuctionWeb.Models
+@using AuctionWeb.Helpers;
 
 @model Product
 
 @section view_title {
     Details Of Products
+}
+
+@section js{
+<script src="~/Assets/popup/popup.js"></script>
+    <script type="text/javascript">
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function currentDiv(n) {
+            showDivs(slideIndex = n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-red", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-red";
+        }
+    </script>
+}
+
+@section css{
+<link href="~/Assets/popup/popup.css" rel="stylesheet" />
 }
 
 @if (Model == null)
@@ -13,19 +50,37 @@
 else
 {
     <div class="row">
-        <div class="col-sm-4">
-            <img src="~/Img/products/@Model.ID/main.jpg" style="width:100%"/>
-            <img src="~/Img/products/@Model.ID/main2.jpg" style="width:100%" />
-            <img src="~/Img/products/@Model.ID/main3.jpg" style="width:100%" />
+        <div class="col-sm-12">
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <div class="w3-content" style="max-width:800px">
+                <img class="mySlides" src="~/Img/products/@Model.ID/main.jpg" style="width:100%">
+                <img class="mySlides" src="~/Img/products/@Model.ID/main2.jpg" style="width:100%">
+                <img class="mySlides" src="~/Img/products/@Model.ID/main3.jpg" style="width:100%">
+            </div>
+
+            <div class="w3-center">
+                <div class="w3-section">
+                    <button class="w3-button w3-light-grey" onclick="plusDivs(-1)">❮ Prev</button>
+                    <button class="w3-button w3-light-grey" onclick="plusDivs(1)">Next ❯</button>
+                </div>
+                <button class="w3-button demo" onclick="currentDiv(1)">1</button>
+                <button class="w3-button demo" onclick="currentDiv(2)">2</button>
+                <button class="w3-button demo" onclick="currentDiv(3)">3</button>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <p>Start Price: @Model.StartPrice</p>&nbsp;
-            <p>Step Price: @Model.StepPrice</p>&nbsp;
-            <p>End Price: @Model.EndPrice</p>&nbsp;
-            <p>Time of post: @Model.TimePost</p>&nbsp;
-            <p>Description: @Html.Raw(HttpUtility.HtmlDecode(Model.Description))</p>            
-        </div>
-        <div class="col-sm-2">
+    </div>
+    <hr />
+    <div class="row">
+        <ul>
+            <li>Start Price: @Model.StartPrice</li>
+            <li>Current Price: @Model.PriceDisplay</li>
+            <li>Buy now with: @Model.EndPrice</li>
+            <li>Step Price: @Model.StepPrice</li>
+            <li>Time End: @Model.TimePost.AddDays(Model.IntervalTime)</li>
+        </ul>
+        <p>Description: @Html.Raw(HttpUtility.HtmlDecode(Model.Description))</p>
+        <!--option area-->
+        <div class="col-sm-12">
             <form id="submit_watchlist" method="post" action="@Url.Action("WatchList","MProduct")">
                 <div class="form-group">
                     <input value="@Model.ID" name="ID" hidden />
@@ -35,6 +90,52 @@ else
                 </div>
             </form>
             <a id="ref_watchlist" class="btn btn-success">Add To Favorite</a>
+            <!--checkuser-->
+            @if (CurrentContext.Islogged() == true)
+                {
+                    double pos = CurrentContext.GetCurUser().positivePoint;
+                    double nav = CurrentContext.GetCurUser().negativePoint;
+                    if ((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
+                    {
+                    <hr />
+                        <form  class="form-inline" method="post" action="@Url.Action("Index","Auction")">
+                            <div class="form-group">
+                                <label class="col-sm-8 control-label">How much you could you pay for it?</label>
+                                <div class="col-sm-4">
+                                    @{
+                                        decimal? recommend = Model.PriceDisplay + Model.StepPrice;
+                                    }
+                                    <input type="text" class="form-control" placeholder="Recommend Price: @recommend" name="Price">
+                                </div>
+                            </div>
+                            <div class="form-group" hidden>
+                                <div class="col-sm-4" hidden>
+                                   
+                                    <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
+                                </div>                               
+                                </div>
+                        </form>
+                }
+                else
+                {
+                    <br />
+                        <br />
+                        <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
+                }
+            }
+            else
+            {
+                <br />
+                    <br />
+                    <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
+            }
         </div>
+
     </div>
 }
+

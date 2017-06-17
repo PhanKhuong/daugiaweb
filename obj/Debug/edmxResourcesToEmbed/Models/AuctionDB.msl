@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AuctionSiteDBModelStoreContainer" CdmEntityContainer="AuctionSiteDBEntities">
+    <EntitySetMapping Name="Auctions">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.Auction">
+        <MappingFragment StoreEntitySet="Auction">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDPro" ColumnName="IDPro" />
+          <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+          <ScalarProperty Name="own" ColumnName="own" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BannedUsers">
       <EntityTypeMapping TypeName="AuctionSiteDBModel.BannedUser">
         <MappingFragment StoreEntitySet="BannedUsers">
@@ -62,6 +76,8 @@
           <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Bought" ColumnName="Bought" />
+          <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
+          <ScalarProperty Name="PlusTime" ColumnName="PlusTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -84,7 +100,8 @@
           <ScalarProperty Name="Permission" ColumnName="Permission" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="PointEvaluation" ColumnName="PointEvaluation" />
+          <ScalarProperty Name="negativePoint" ColumnName="negativePoint" />
+          <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

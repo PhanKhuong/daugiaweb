@@ -40,7 +40,9 @@ namespace AuctionWeb.Controllers
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
-                vm.CurrentPrice = null;
+                vm.PriceDisplay = vm.StartPrice;
+                vm.PlusTime = vm.IntervalTime;
+                vm.CurrentPrice = 0;
                 vm.HighestKeeper = null;
                 vm.EvaluationPoint = null;
                 vm.TimePost = DateTime.Now;
@@ -79,7 +81,7 @@ namespace AuctionWeb.Controllers
             {
                 int Iduser = CurrentContext.GetCurUser().ID;
                 var list = ctx.Products.Where(p => ((p.UserID == Iduser) 
-                && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost, p.IntervalTime))))
+                && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost,  p.IntervalTime))))
                 .ToList();
                 return View(list);
             }          

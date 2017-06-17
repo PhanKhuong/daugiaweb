@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AuctionSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Auction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPro" Type="Int32" />
+    <Property Name="IDUser" Type="Int32" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="MaxPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="own" Type="Boolean" />
+  </EntityType>
   <EntityType Name="BannedUser">
     <Key>
       <PropertyRef Name="IDProduct" />
@@ -62,6 +75,8 @@
     <Property Name="CurrentPrice" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="Bought" Type="Boolean" />
+    <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PlusTime" Type="Int32" />
   </EntityType>
   <EntityType Name="ProductsInCharge">
     <Key>
@@ -83,7 +98,8 @@
     <Property Name="Permission" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DOB" Type="DateTime" Precision="3" />
-    <Property Name="PointEvaluation" Type="Double" />
+    <Property Name="negativePoint" Type="Double" Nullable="false" />
+    <Property Name="positivePoint" Type="Double" Nullable="false" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>
@@ -97,6 +113,7 @@
     <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auctions" EntityType="Self.Auction" />
     <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Evalutions" EntityType="Self.Evalution" />

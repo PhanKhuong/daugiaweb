@@ -12,17 +12,15 @@ namespace AuctionWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Auction
     {
         public int ID { get; set; }
-        public string Address { get; set; }
-        public string Email { get; set; }
+        public Nullable<int> IDPro { get; set; }
+        public Nullable<int> IDUser { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> Permission { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
-        public double negativePoint { get; set; }
-        public double positivePoint { get; set; }
+        public string Fullname { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
+        public Nullable<decimal> MaxPrice { get; set; }
+        public Nullable<bool> own { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace AuctionWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Auction> Auctions { get; set; }
         public virtual DbSet<BannedUser> BannedUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Evalution> Evalutions { get; set; }

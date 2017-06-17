@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AuctionSiteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Auction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPro" Type="int" />
+    <Property Name="IDUser" Type="int" />
+    <Property Name="Username" Type="varchar" MaxLength="20" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="MaxPrice" Type="money" />
+    <Property Name="own" Type="bit" />
+  </EntityType>
   <EntityType Name="BannedUsers">
     <Key>
       <PropertyRef Name="IDProduct" />
@@ -62,6 +75,8 @@
     <Property Name="CurrentPrice" Type="money" />
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="Bought" Type="bit" />
+    <Property Name="PriceDisplay" Type="money" />
+    <Property Name="PlusTime" Type="int" />
   </EntityType>
   <EntityType Name="ProductsInCharge">
     <Key>
@@ -83,7 +98,8 @@
     <Property Name="Permission" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="DOB" Type="datetime" />
-    <Property Name="PointEvaluation" Type="float" />
+    <Property Name="negativePoint" Type="float" Nullable="false" />
+    <Property Name="positivePoint" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>
@@ -97,6 +113,7 @@
     <Property Name="Username" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityContainer Name="AuctionSiteDBModelStoreContainer">
+    <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Evalutions" EntityType="Self.Evalutions" Schema="dbo" store:Type="Tables" />

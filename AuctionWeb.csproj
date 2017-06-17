@@ -624,6 +624,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuctionController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MAccountController.cs" />
@@ -636,6 +637,9 @@
     </Compile>
     <Compile Include="Helpers\CurrentContext.cs" />
     <Compile Include="Helpers\StringUtils.cs" />
+    <Compile Include="Models\Auction.cs">
+      <DependentUpon>AuctionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AuctionDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -654,6 +658,7 @@
     <Compile Include="Models\BannedUser.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BargainVM.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
@@ -713,6 +718,7 @@
     <Content Include="Views\MAccount\WaitingUsers.cshtml" />
     <Content Include="Views\MAccount\Delete.cshtml" />
     <Content Include="Views\MCategories\Index.cshtml" />
+    <Content Include="Views\Auction\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
