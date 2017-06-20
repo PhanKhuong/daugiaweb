@@ -1,7 +1,7 @@
 ﻿@using BotDetect.Web.Mvc;
 
 @section view_title {
-    Sign In & Sign Up
+    Sign In
 }
 
 @section css {
@@ -29,67 +29,6 @@
                 opacity: "toggle"
             }, "slow");
         });
-        $('.datepicker').datepicker({
-            format: 'd/m/yyyy',
-            autoclose: true,
-        });
-        $('#frmRegister').validate({
-            rules: {
-                f_Username: {
-                    required: true,
-                    minlength: 6
-                },
-                f_RawPassword: {
-                    required: true,
-                    minlength: 6
-                },
-                f_Name: {
-                    required: true
-                },
-                f_Address: {
-                    required: true
-                },
-                f_Email: {
-                    required: true,
-                    email: true
-                },
-                f_DOB: {
-                    required: true
-                },
-                f_RawPasswordAgain: {
-                    required: true,
-                    equalTo: '#id_password'
-                }
-            },
-
-            messages: {
-                f_Username: {
-                    required: 'Please input your username',
-                    minlength: 'Username must has at least 6 characters'
-                },
-                f_RawPassword: {
-                    required: 'Please input your password',
-                    minlength: 'password must has at least 6 characters',
-                },
-                f_RawPasswordAgain: {
-                    required: 'Please type your password again',
-                    equalTo: 'Two types must be the same'
-                },
-                f_Name: {
-                    required: 'Please input your name'
-                },
-                f_Address: {
-                    required: 'Please input your address'
-                },
-                f_Email: {
-                    required: 'Please input your email',
-                    email: 'Please input in correct format of email'
-                },
-                f_DOB: {
-                    required: 'Please input your birthday'
-                }
-            }
-        });
     </script>
 }
 
@@ -103,7 +42,7 @@
 <div class="w3l_banner_nav_right">
     <!-- login -->
     <div class="w3_login">
-        <h3>Sign In & Sign Up</h3>
+        <h3>Sign In</h3>
         <div class="w3_login_module">
             <div class="module form-module">
                 <div class="toggle">
@@ -123,12 +62,12 @@
                     <h2>Create an account</h2>
                     <form method="post" action="" id="frmRegister">
                         <input type="text" name="f_Username" placeholder="Username">
-                        <input type="password" name="f_RawPassword" placeholder="Password">
-                        <input type="password" name="f_RawPasswordAgain" placeholder="Type Again">
+                        <input type="password" name="f_RawPassword" placeholder="Password" id="id_password">
+                        <input type="password" name="f_RawPasswordAgain" placeholder="Type Again" id="id_password">
                         <input type="text" name="f_Name" placeholder="Full Name">
                         <input type="text" name="f_Address" placeholder="Address">
                         <input type="text" name="f_Email" placeholder="Email">
-                        <input type="text" name="f_DOB" placeholder="Birthday">
+                        <input type="text" name="f_DOB" class="datepicker" placeholder="Birthday">
                             @{
                                 var exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
                                 exampleCaptcha.Reset();
