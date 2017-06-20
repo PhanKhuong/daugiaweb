@@ -1,133 +1,264 @@
-﻿@using AuctionWeb.Helpers;
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auction</title>
-    <link href="~/Assets/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Assets/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <title>@RenderSection("view_title")</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/Assets/template/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Assets/template/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link href="~/Assets/template/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="~/Assets/template/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Assets/template/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Assets/template/js/easing.js"></script>
     @RenderSection("css", false)
+    <script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+    </script>
+    <!-- start-smoth-scrolling -->
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                    <i class="fa fa-home"></i>
-                </a>
+    <!-- header -->
+    <div class="agileits_header">
+        <div class="w3l_offers">
+            <a href="products.html">Today's special Offers !</a>
+        </div>
+        <div class="w3l_search">
+            <form action="#" method="post">
+                <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+                <input type="submit" value=" ">
+            </form>
+        </div>
+        <div class="product_list_header">
+            <form action="#" method="post" class="last">
+                <fieldset>
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="display" value="1" />
+                    <input type="submit" name="submit" value="View your cart" class="button" />
+                </fieldset>
+            </form>
+        </div>
+        <div class="w3l_header_right">
+            <ul>
+                <li class="dropdown profile_details_drop">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+                    <div class="mega-dropdown-menu">
+                        <div class="w3ls_vegetables">
+                            <ul class="dropdown-menu drp-mnu">
+                                <li><a href="@Url.Action("Login","Account")">Login</a></li>
+                                <li><a href="@Url.Action("Register","Account")">Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="w3l_header_right1">
+            <h2><a href="mail.html">Contact Us</a></h2>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <!-- script-for sticky-nav -->
+    <script>
+        $(document).ready(function () {
+            var navoffeset = $(".agileits_header").offset().top;
+            $(window).scroll(function () {
+                var scrollpos = $(window).scrollTop();
+                if (scrollpos >= navoffeset) {
+                    $(".agileits_header").addClass("fixed");
+                } else {
+                    $(".agileits_header").removeClass("fixed");
+                }
+            });
+
+        });
+    </script>
+    <!-- //script-for sticky-nav -->
+    <div class="logo_products">
+        <div class="container">
+            <div class="w3ls_logo_products_left">
+                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
+            <div class="w3ls_logo_products_left1">
+                <ul class="special_items">
+                    <li><a href="events.html">Events</a><i>/</i></li>
+                    <li><a href="about.html">About Us</a><i>/</i></li>
+                    <li><a href="products.html">Best Deals</a><i>/</i></li>
+                    <li><a href="services.html">Services</a></li>
+                </ul>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="phone_email">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //header -->
+    @RenderSection("breadcrumb", false)
+    <!-- banner -->
+    <div class="banner">
+        <div class="w3l_banner_nav_left">
+            <nav class="navbar nav_bottom">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header nav_2">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                @Html.Action("ListOfCats", "Categories")
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div>
+        @RenderBody()
+        <div class="clearfix"></div>
+        </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="col-md-3 w3_footer_grid">
+                <h3>information</h3>
+                <ul class="w3_footer_grid_list">
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Best Deals</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="short-codes.html">Short Codes</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 w3_footer_grid">
+                <h3>policy info</h3>
+                <ul class="w3_footer_grid_list">
+                    <li><a href="faqs.html">FAQ</a></li>
+                    <li><a href="privacy.html">privacy policy</a></li>
+                    <li><a href="privacy.html">terms of use</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 w3_footer_grid">
+                <h3>what in stores</h3>
+                <ul class="w3_footer_grid_list">
+                    <li><a href="pet.html">Pet Food</a></li>
+                    <li><a href="frozen.html">Frozen Snacks</a></li>
+                    <li><a href="kitchen.html">Kitchen</a></li>
+                    <li><a href="products.html">Branded Foods</a></li>
+                    <li><a href="household.html">Households</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 w3_footer_grid">
+                <h3>twitter posts</h3>
+                <ul class="w3_footer_grid_list1">
+                    <li>
+                        <label class="fa fa-twitter" aria-hidden="true"></label><i>01 day ago</i><span>
+                            Non numquam <a href="#">http://sd.ds/13jklf#</a>
+                            eius modi tempora incidunt ut labore et
+                            <a href="#">http://sd.ds/1389kjklf#</a>quo nulla.
+                        </span>
+                    </li>
+                    <li>
+                        <label class="fa fa-twitter" aria-hidden="true"></label><i>02 day ago</i><span>
+                            Con numquam <a href="#">http://fd.uf/56hfg#</a>
+                            eius modi tempora incidunt ut labore et
+                            <a href="#">http://fd.uf/56hfg#</a>quo nulla.
+                        </span>
                     </li>
                 </ul>
-                @*<form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>*@
-                <ul class="nav navbar-nav navbar-right">
-                    @if (CurrentContext.Islogged() == false)
-                    {
-                        <li><a href="@Url.Action("Login","Account")">Login</a></li>
-                        <li><a href="@Url.Action("Register","Account")">Register</a></li>
-                    }
-                    else
-                    {
-                        <li><a class="btn btn-success" href="@Url.Action("WatchList","MProduct")">Watched List</a></li>
-                        <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    @CurrentContext.GetCurUser().Name<span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    @if (CurrentContext.GetCurUser().Permission == 0)
-                                    {
-                                        <li id="askpermission"><a href="javascript:;">Ask For Selling in 7 days</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("Profile","Account")">User Information</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("ChangeInfo","Account")">Change User Information</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
-                                    }
-                                    else if ((CurrentContext.GetCurUser().Permission) == 1 && (CurrentContext.GetCurUser().Username.Equals("administrator") == true))
-                                    {
-                                        <li><a href="@Url.Action("WaitingUsers","MAccount")">Manage Selling Asking</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("Index","MCategories")">Manage Categories</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("Delete","MAccount")">Manage Users</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li><a href="@Url.Action("Index","MProduct")">Manage Products</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("Profile","Account")">User Information</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("ChangeInfo","Account")">Change User Information</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
-                                    }
-
-                                </ul>
-                            </li>
-                    }
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <form id="frmLogout" method="post" action="@Url.Action("Logout", "Account")"></form>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Categories</div>
-                    <div class="panel-body">
-                        @Html.Action("ListOfCats", "Categories")
-                    </div>
-                </div>
             </div>
-            <div class="col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading">@RenderSection("view_title")</div>
-                    <div class="panel-body">
-                        @RenderBody()
+            <div class="clearfix"> </div>
+            <div class="agile_footer_grids">
+                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                    <div class="w3_footer_grid_bottom">
+                        <h4>100% secure payments</h4>
+                        <img src="~/Assets/template/images/card.png" alt=" " class="img-responsive" />
                     </div>
                 </div>
+                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                    <div class="w3_footer_grid_bottom">
+                        <h5>connect with us</h5>
+                        <ul class="agileits_social_icons">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="wthree_footer_copy">
+                <p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
             </div>
         </div>
     </div>
-    <script src="~/Assets/Jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/Assets/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <!-- //footer -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Assets/template/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <script src="~/Assets/template/js/minicart.min.js"></script>
+    <script>
+        // Mini Cart
+        paypal.minicart.render({
+            action: '#'
+        });
+
+        if (~window.location.search.indexOf('reset=true')) {
+            paypal.minicart.reset();
+        }
+    </script>
     <script type="text/javascript">
         $('#logoutLink').on('click', function () {
             $('#frmLogout').submit();
@@ -139,9 +270,6 @@
             $('#submit_askpermission').submit();
         });
     </script>
-    <!--ask permission form-->
-    <form id="submit_askpermission" method="post" action="@Url.Action("AskPermission","MAccount")"></form>
-    <!---->
     @RenderSection("js", false)
 </body>
 </html>

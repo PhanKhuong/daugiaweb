@@ -1,13 +1,96 @@
-﻿@section view_title {
-    Login
+﻿@using BotDetect.Web.Mvc;
+
+@section view_title {
+    Sign In & Sign Up
 }
 
 @section css {
+<link href="~/Assets/boostrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
     <style type="text/css">
         label {
             font-weight: normal !important;
         }
     </style>
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+}
+
+@section js {
+    <script src="~/Assets/boostrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Assets/jquery_validation/jquery.validate.js"></script>
+    <script type="text/javascript">
+        $('.toggle').click(function () {
+            // Switches the Icon
+            $(this).children('i').toggleClass('fa-pencil');
+            // Switches the forms  
+            $('.form').animate({
+                height: "toggle",
+                'padding-top': 'toggle',
+                'padding-bottom': 'toggle',
+                opacity: "toggle"
+            }, "slow");
+        });
+        $('.datepicker').datepicker({
+            format: 'd/m/yyyy',
+            autoclose: true,
+        });
+        $('#frmRegister').validate({
+            rules: {
+                f_Username: {
+                    required: true,
+                    minlength: 6
+                },
+                f_RawPassword: {
+                    required: true,
+                    minlength: 6
+                },
+                f_Name: {
+                    required: true
+                },
+                f_Address: {
+                    required: true
+                },
+                f_Email: {
+                    required: true,
+                    email: true
+                },
+                f_DOB: {
+                    required: true
+                },
+                f_RawPasswordAgain: {
+                    required: true,
+                    equalTo: '#id_password'
+                }
+            },
+
+            messages: {
+                f_Username: {
+                    required: 'Please input your username',
+                    minlength: 'Username must has at least 6 characters'
+                },
+                f_RawPassword: {
+                    required: 'Please input your password',
+                    minlength: 'password must has at least 6 characters',
+                },
+                f_RawPasswordAgain: {
+                    required: 'Please type your password again',
+                    equalTo: 'Two types must be the same'
+                },
+                f_Name: {
+                    required: 'Please input your name'
+                },
+                f_Address: {
+                    required: 'Please input your address'
+                },
+                f_Email: {
+                    required: 'Please input your email',
+                    email: 'Please input in correct format of email'
+                },
+                f_DOB: {
+                    required: 'Please input your birthday'
+                }
+            }
+        });
+    </script>
 }
 
 @if (ViewBag.ErrorMsg != null)
@@ -17,31 +100,47 @@
     </div>
 }
 
-<form class="form-horizontal" method="post" action="" id="frmLogin">
-    <div class="form-group">
-        <label for="fsfesfewf" class="col-sm-2 control-label">Username</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="tefxt" placeholder="Username" name="f_Username">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="ffh" class="col-sm-2 control-label">Type Password</label>
-        <div class="col-sm-4">
-            <input type="password" class="form-control" id="id_password" placeholder="Password" name="f_RawPassword">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="remember"/> Remember
-                </label>
+<div class="w3l_banner_nav_right">
+    <!-- login -->
+    <div class="w3_login">
+        <h3>Sign In & Sign Up</h3>
+        <div class="w3_login_module">
+            <div class="module form-module">
+                <div class="toggle">
+                    <i class="fa fa-times fa-pencil"></i>
+                    <div class="tooltip">Sign Up</div>
+                </div>
+                <div class="form">
+                    <h2>Login to your account</h2>
+                    <form action="" method="post" >
+                        <input type="text" name="f_Username" placeholder="Username">
+                        <input type="password" name="f_RawPassword" placeholder="Password">
+                        <input type="checkbox" name="remember" /> Remember
+                        <input type="submit" value="Login">
+                    </form>
+                </div>
+                <div class="form">
+                    <h2>Create an account</h2>
+                    <form method="post" action="" id="frmRegister">
+                        <input type="text" name="f_Username" placeholder="Username">
+                        <input type="password" name="f_RawPassword" placeholder="Password">
+                        <input type="password" name="f_RawPasswordAgain" placeholder="Type Again">
+                        <input type="text" name="f_Name" placeholder="Full Name">
+                        <input type="text" name="f_Address" placeholder="Address">
+                        <input type="text" name="f_Email" placeholder="Email">
+                        <input type="text" name="f_DOB" placeholder="Birthday">
+                            @{
+                                var exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+                                exampleCaptcha.Reset();
+                            }
+                            @Html.Captcha(exampleCaptcha)
+                        <br />
+                        <input type="text" class="form-control" placeholder="Captcha" name="CaptchaCode">
+                        <input type="submit" value="Register">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success">Login</button>
-        </div>
-    </div>
-</form>
+</div>
+    <!-- //login -->

@@ -4,12 +4,12 @@
 
 @using AuctionWeb.Models;
 
-<div class="list-group">
-    @foreach (var c in Model)
-    {   
-        <a href="@Url.Action("ByCat", "Products", new {id = @c.ID })" class="list-group-item">
-            @c.Name
-        </a>
-    }   
+<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        @foreach (var c in Model)
+        {
+            <li><a href="@Url.Action("ByCat", "Products", new {id = @c.ID })">@c.Name</a></li>
+        }        
+    </ul>
 </div>
 

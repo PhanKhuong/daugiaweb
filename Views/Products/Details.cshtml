@@ -4,46 +4,42 @@
 @model Product
 
 @section view_title {
-    Details Of Products
+    Details
 }
 
 @section js{
-<script src="~/Assets/popup/popup.js"></script>
+    <script src="~/Assets/popup/popup.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script type="text/javascript">
         $('.edituser').on('click', function () {
             $('.submit_edituser').submit();
         });
-        var slideIndex = 1;
-        showDivs(slideIndex);
+    </script>
+<script>
+        var myIndex = 0;
+        carousel();
 
-        function plusDivs(n) {
-            showDivs(slideIndex += n);
-        }
-
-        function currentDiv(n) {
-            showDivs(slideIndex = n);
-        }
-
-        function showDivs(n) {
+        function carousel() {
             var i;
             var x = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            if (n > x.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = x.length }
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
             }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-red", "");
-            }
-            x[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " w3-red";
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
         }
-    </script>
+</script>
 }
 
 @section css{
-<link href="~/Assets/popup/popup.css" rel="stylesheet" />
+    <link href="~/Assets/popup/popup.css" rel="stylesheet" />
+    <style>
+        .mySlides {
+            display: none;
+        }
+    </style>
 }
 
 @if (Model == null)
@@ -52,144 +48,60 @@
 }
 else
 {
-    <div class="alert alert-warning">
-        <strong>@ViewBag.info</strong>
-    </div>
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-            <div class="w3-content" style="max-width:800px">
-                <img class="mySlides" src="~/Img/products/@Model.ID/main.jpg" style="width:100%">
-                <img class="mySlides" src="~/Img/products/@Model.ID/main2.jpg" style="width:100%">
-                <img class="mySlides" src="~/Img/products/@Model.ID/main3.jpg" style="width:100%">
+    <div class="w3l_banner_nav_right">
+        <div class="agileinfo_single">
+            <h5>@Model.Name</h5>
+            <div class="col-md-4 agileinfo_single_left">
+                @* if have a problem, if responsive to class of img *@
+                <div class="w3-content w3-section" style="max-width:500px">
+                    <img class="mySlides w3-animate-top" src="~/Img/products/@Model.ID/main.jpg" style="width:100%">
+                    <img class="mySlides w3-animate-bottom" src="~/Img/products/@Model.ID/main2.jpg" style="width:100%">
+                    <img class="mySlides w3-animate-top" src="~/Img/products/@Model.ID/main3.jpg" style="width:100%">
+                    <img class="mySlides w3-animate-bottom" src="img_rr_04.jpg" style="width:100%">
+                </div>
             </div>
-
-            <div class="w3-center">
-                <div class="w3-section">
-                    <button class="w3-button w3-light-grey" onclick="plusDivs(-1)">❮ Prev</button>
-                    <button class="w3-button w3-light-grey" onclick="plusDivs(1)">Next ❯</button>
+            <div class="col-md-8 agileinfo_single_right">
+                <div class="rating1">
+                    <span class="starRating">
+                        <input id="rating5" type="radio" name="rating" value="5">
+                        <label for="rating5">5</label>
+                        <input id="rating4" type="radio" name="rating" value="4">
+                        <label for="rating4">4</label>
+                        <input id="rating3" type="radio" name="rating" value="3" checked>
+                        <label for="rating3">3</label>
+                        <input id="rating2" type="radio" name="rating" value="2">
+                        <label for="rating2">2</label>
+                        <input id="rating1" type="radio" name="rating" value="1">
+                        <label for="rating1">1</label>
+                    </span>
                 </div>
-                <button class="w3-button demo" onclick="currentDiv(1)">1</button>
-                <button class="w3-button demo" onclick="currentDiv(2)">2</button>
-                <button class="w3-button demo" onclick="currentDiv(3)">3</button>
-            </div>
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <ul>
-            <li>Start Price: @Model.StartPrice</li>
-            <li>Current Price: @Model.PriceDisplay</li>
-            <li>Buy now with: @Model.EndPrice</li>
-            <li>Step Price: @Model.StepPrice</li>
-            <li>Time End: @Model.TimePost.AddDays(Model.IntervalTime)</li>
-        </ul>
-        <p>Description: @Html.Raw(HttpUtility.HtmlDecode(Model.Description))</p>
-        <!--option area-->
-        <div class="col-sm-12">
-            <form id="submit_watchlist" method="post" action="@Url.Action("WatchList","MProduct")">
-                <div class="form-group">
-                    <input value="@Model.ID" name="ID" hidden />
+                <div class="w3agile_description">
+                    <h4>Description :</h4>
+                    <p>@Model.Description</p>
                 </div>
-                <div class="form-group">
-                    <input value="@Model.UserID" name="UserID" hidden />
-                </div>
-            </form>
-            <a id="ref_watchlist" class="btn btn-success">Add To My Favorite</a>
-            <!--checkuser-->
-            @if (CurrentContext.Islogged() == true)
-                {
-                    double pos = CurrentContext.GetCurUser().positivePoint;
-                    double nav = CurrentContext.GetCurUser().negativePoint;
-                    if (((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
-                    && CurrentContext.GetCurUser().ID != Model.lastuser)
-                    {
-                    <hr />
-                        <form  class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction", new { Product = Model })">
-                            <div class="form-group">
-                                <label class="col-sm-8 control-label">How much you could you pay for it?</label>
-                                <div class="col-sm-4">
-                                    @{
-                                        decimal? recommend = Model.PriceDisplay + Model.StepPrice;
-                                    }
-                                    <input type="text" class="form-control" placeholder="Recommend Price: @recommend" name="Price">
-                                </div>
-                            </div>
-                            <div class="form-group" hidden>
-                                <div class="col-sm-4" hidden>
-                                   
-                                    <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
-                                </div>
-                            </div>  
-                            @if (ViewBag.CheckBanned == true && CurrentContext.Islogged() == true)
-                            {
-                                <div class="alert alert-warning">
-                                    <strong>You have no right anymore to race for this product!!!</strong>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
-                                        <!---->
-                                        <div id="output"></div>
-
-                                        <div id="overlay" class="web_dialog_overlay"></div>
-
-                                        <div id="dialog" class="web_dialog">
-                                            <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
-                                                <tr>
-                                                    <td class="web_dialog_title">Confrimation</td>
-                                                    <td class="web_dialog_title align_right">
-                                                        <a href="#" id="btnClose">Close</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" style="padding-left: 15px;">
-                                                        <b>Click yes to confirm again??</b>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" style="text-align: center;">
-                                                        <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <!---->
-                                    </div>
-                                </div>
-                            }                         
+                <div class="snipcart-item block">
+                    <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                        <h4>@Model.PriceDisplay</h4>
+                    </div>
+                    <div class="snipcart-details agileinfo_single_right_details">
+                        <form action="#" method="post">
+                            <fieldset>
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="business" value=" " />
+                                <input type="hidden" name="item_name" value="pulao basmati rice" />
+                                <input type="hidden" name="amount" value="21.00" />
+                                <input type="hidden" name="discount_amount" value="1.00" />
+                                <input type="hidden" name="currency_code" value="USD" />
+                                <input type="hidden" name="return" value=" " />
+                                <input type="hidden" name="cancel_return" value=" " />
+                                <input type="submit" name="submit" value="Add to cart" class="button" />
+                            </fieldset>
                         </form>
-                }
-                else
-                {
-                    <br />
-                        <br />
-                        <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
-                }
-            }
-            else
-            {
-                <br />
-                    <br />
-                    <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
-            }
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
         </div>
-
     </div>
 }
