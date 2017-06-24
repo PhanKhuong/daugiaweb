@@ -15,10 +15,10 @@
     <div class="row">
         <div class="row">
             <div class="col-md-9">
-                <h3>
-                    Top 5 Producs With The Most Number Of Bargain
-                </h3>
+                <center><h3 style="color: forestgreen"><u>Producs With The Most Number Of Bargain</u></h3></center>
             </div>
+            <br />
+            <br />
         </div>
         <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
             <!-- Wrapper for slides -->
@@ -39,7 +39,7 @@
                                                         @p.Name
                                                     </h5>
                                                     <h5 class="price-text-color">
-                                                        Current Price: @p.PriceDisplay
+                                                        Current Price: @string.Format("{0:N0}", p.PriceDisplay)
                                                     </h5>
                                                 </div>
                                             </div>
@@ -60,13 +60,14 @@
         </div>
     </div>
     <!--top max price-->
+    <br />
     <div class="row">
         <div class="row">
             <div class="col-md-9">
-                <h3>
-                    Top 5 Expensive Products Available
-                </h3>
+                <center><h3 style="color: forestgreen"><u>Top 5 Expensive Products Available</u></h3></center>
             </div>
+            <br />
+            <br />
         </div>
         <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
             <!-- Wrapper for slides -->
@@ -87,7 +88,7 @@
                                                     @p.Name
                                                 </h5>
                                                 <h5 class="price-text-color">
-                                                    Current Price: @p.PriceDisplay
+                                                    Current Price: @string.Format("{0:N0}", p.PriceDisplay)
                                                 </h5>
                                             </div>
                                         </div>
@@ -108,14 +109,15 @@
         </div>
     </div>
     <!--top Run out of time-->
+    <br />
     <div class="row">
         <div class="row">
             <div class="col-md-9">
-                <h3>
-                    Top 5 Run Out Of Time Products
-                </h3>
+                    <center><h3 style="color: forestgreen"><u>Top 5 Run Out Of Time Products</u></h3></center>
             </div>
         </div>
+        <br />
+        <br />
         <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
@@ -135,7 +137,7 @@
                                                     @p.Name
                                                 </h5>
                                                 <h5 class="price-text-color">
-                                                    Current Price: @p.PriceDisplay
+                                                    Current Price: @string.Format("{0:N0}", p.PriceDisplay)
                                                 </h5>
                                             </div>
                                         </div>
