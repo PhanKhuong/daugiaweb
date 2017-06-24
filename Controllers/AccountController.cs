@@ -122,6 +122,7 @@ namespace AuctionWeb.Controllers
                     ctx.SaveChanges();
                 }              
             }
+            ViewBag.suss = "Cheers! sign up successfully. Please login to keep track your works...";
             return View();
         }
 

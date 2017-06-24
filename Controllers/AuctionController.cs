@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using AuctionWeb.Models;
 using AuctionWeb.Helpers;
 using System.Text;
+using Postal;
 
 namespace AuctionWeb.Controllers
 {
@@ -23,6 +24,24 @@ namespace AuctionWeb.Controllers
                 var user = CurrentContext.GetCurUser();
                 var pro = ctx.Products.Where(p => p.ID == vm.ID).FirstOrDefault<Product>();
                 //check if this user just set a price for this product
+                if(vm.Price >= pro.EndPrice)
+                {
+                    var ac = new Auction()
+                    {
+                        IDPro = pro.ID,
+                        IDUser = user.ID,
+                        Username = user.Username,
+                        Fullname = user.Name,
+                        Time = DateTime.Now,
+                        MaxPrice = vm.Price,
+                        own = true,
+                    };
+                    pro.lastuser = user.ID;
+                    pro.PriceDisplay = ac.MaxPrice;
+                    pro.Bought = true;
+                    ctx.Auctions.Add(ac);
+                    ctx.SaveChanges();
+                }
                 if (pro.lastuser != CurrentContext.GetCurUser().ID
                    && (vm.Price >= pro.PriceDisplay + pro.StepPrice))
                 {
@@ -43,7 +62,6 @@ namespace AuctionWeb.Controllers
                         pro.PriceDisplay = ac.MaxPrice;
                         ctx.Auctions.Add(ac);
                         ctx.SaveChanges();
-                        ViewBag.info = "successfully!!!";
                     }
                     //check if we have many set price already
                     else
@@ -116,14 +134,23 @@ namespace AuctionWeb.Controllers
         // GET: Auction/BanUser
         public ActionResult BanUser(int iduser, int idpro)
         {
+            dynamic emailkick = new Email("Kick");
             using (var ctx = new AuctionSiteDBEntities())
             {
+                //get product 
+                var pro = ctx.Products.Where(p => p.ID == idpro).FirstOrDefault();
                 var user = ctx.Users.Where(u => u.ID == iduser).FirstOrDefault();
                 var ban = new BannedUser()
                 {
                     IDProduct = idpro,
                     IDUser = iduser,
                 };
+
+                //create an email                
+                emailkick.To = CurrentContext.GetCurUser().Email;
+                emailkick.Name = user.Name;
+                emailkick.ProName = pro.Name;
+                emailkick.Send();
                 ctx.BannedUsers.Add(ban);
                 ctx.SaveChanges();
             }
@@ -153,9 +180,11 @@ namespace AuctionWeb.Controllers
                     pro.PriceDisplay = pro.StartPrice;
                     pro.lastuser = null;
                     update.SaveChanges();
-                }
-                return RedirectToAction("SettedBid", "Auction", new { id = idpro });
+                    return new EmailViewResult(emailkick);
+                    
+                }              
             }
+            return RedirectToAction("SettedBid", "Auction", new { id = idpro }); // dong nay nam o trnag update.save
         }
         // GET: Auction/ShowWin
         public ActionResult ShowWin()

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AuctionWeb.Models;
 using AuctionWeb.Helpers;
 using System.Data.Entity.Core.Objects;
+using Postal;
 
 namespace AuctionWeb.Controllers
 {
@@ -27,7 +28,27 @@ namespace AuctionWeb.Controllers
                 {
                     foreach (Product pro in listpros)
                     {
+                        dynamic emailforwinner = new Email("win");
+                        dynamic emailforonwer = new Email("owner");
                         pro.Bought = true;
+                        if(pro.lastuser != null)
+                        {
+                            var user = ctx.Users.Where(u => u.ID == pro.lastuser).FirstOrDefault();
+                            var userowner = ctx.Users.Where(u => u.ID == pro.UserID).FirstOrDefault();
+                            //create an email       
+                            //for winnner
+                            emailforwinner.To = user.Email;
+                            emailforwinner.Name = user.Name;
+                            emailforwinner.ProName = pro.Name;
+                            emailforwinner.price = pro.PriceDisplay;
+                            emailforwinner.Send();
+                            //for onwer
+                            emailforonwer.To = userowner.Email;
+                            emailforonwer.Name = userowner.Name;
+                            emailforonwer.ProName = pro.Name;
+                            emailforonwer.price = pro.PriceDisplay;
+                            emailforwinner.Send();
+                        }
                     }
                 }
                 ctx.SaveChanges();
@@ -68,6 +89,11 @@ namespace AuctionWeb.Controllers
                 }
                 return View(model);
             }
+        }
+        // GET: Products/Search
+        public ActionResult Search(int? id)
+        {
+            return View();
         }
     }
 }

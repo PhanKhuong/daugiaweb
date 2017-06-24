@@ -41,22 +41,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- header -->
     <div class="agileits_header">
         <div class="w3l_offers">
-            <a href="products.html">Today's special Offers !</a>
+            <a href=@Url.Action("Index", "Home")>Winning is winning!!!</a>
         </div>
         <div class="w3l_search">
             <form action="#" method="post">
-                <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+                <input type="text" name="Product" placeholder="Search" />
                 <input type="submit" value=" ">
             </form>
         </div>
         <div class="product_list_header">
-            <form action="#" method="post" class="last">
-                <fieldset>
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="View your cart" class="button" />
-                </fieldset>             
-            </form>
         </div>
         <div class="w3l_header_right">
             <ul>
@@ -124,9 +117,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </li>
             </ul>
         </div>
-        <div class="w3l_header_right1">
-            <h1><a class="btn btn-success" href="@Url.Action("WatchList","MProduct")">Watched List</a></h1>
-        </div>
+        @if (CurrentContext.Islogged() == true)
+        {
+            <div class="w3l_header_right1">
+                <h1><a class="btn btn-success" href="@Url.Action("WatchList","MProduct")">Watched List</a></h1>
+            </div>
+        }
             <div class="clearfix"> </div>
         </div>
     <!-- script-for sticky-nav -->
@@ -148,20 +144,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="w3ls_logo_products_left">
                 <h1><a href="@Url.Action("Index", "Home")"><span>Hit</span>Auction</a></h1>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="special_items">
-                    <li><a href="events.html">Events</a><i>/</i></li>
-                    <li><a href="about.html">About Us</a><i>/</i></li>
-                    <li><a href="products.html">Best Deals</a><i>/</i></li>
-                    <li><a href="services.html">Services</a></li>
-                </ul>
-            </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="phone_email">
-                    <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
-                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:store@grocery.com">store@grocery.com</a></li>
-                </ul>
             </div>
             <div class="clearfix"> </div>
         </div>
@@ -198,7 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="agile_footer_grids">
                 <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
                     <div class="w3_footer_grid_bottom">
-                        <h4>100% secure payments</h4>
+                        <h4>Will be available in next month</h4>
                         <img src="~/Assets/template/images/card.png" alt=" " class="img-responsive" />
                     </div>
                 </div>
@@ -206,7 +188,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="w3_footer_grid_bottom">
                         <h5>connect with us</h5>
                         <ul class="agileits_social_icons">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.facebook.com/phanthekhuong1996" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                             <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                             <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
