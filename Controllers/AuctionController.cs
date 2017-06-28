@@ -19,6 +19,7 @@ namespace AuctionWeb.Controllers
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
+                dynamic emailsetprice = new Email("setprice");
                 var list_product = ctx.Products.ToList();
                 var list_auction = ctx.Auctions.ToList();
                 var user = CurrentContext.GetCurUser();
@@ -41,11 +42,17 @@ namespace AuctionWeb.Controllers
                     pro.Bought = true;
                     ctx.Auctions.Add(ac);
                     ctx.SaveChanges();
+                    //create an email                          
+                    emailsetprice.To = user.Email;
+                    emailsetprice.Name = user.Name;
+                    emailsetprice.ProName = pro.Name;
+                    emailsetprice.price = pro.PriceDisplay;
+                    emailsetprice.Send();
                 }
                 if (pro.lastuser != CurrentContext.GetCurUser().ID
                    && (vm.Price >= pro.PriceDisplay + pro.StepPrice))
                 {
-                    //check if each product has been setted a price once time
+                    //check if each product has been setted a price once
                     if ((list_auction.Any(l => l.IDPro == pro.ID) == false))
                     {
                         var ac = new Auction()
@@ -62,6 +69,12 @@ namespace AuctionWeb.Controllers
                         pro.PriceDisplay = ac.MaxPrice;
                         ctx.Auctions.Add(ac);
                         ctx.SaveChanges();
+                        //create an email                          
+                        emailsetprice.To = user.Email;
+                        emailsetprice.Name = user.Name;
+                        emailsetprice.ProName = pro.Name;
+                        emailsetprice.price = pro.PriceDisplay;
+                        emailsetprice.Send();
                     }
                     //check if we have many sets of price already
                     else
@@ -70,7 +83,7 @@ namespace AuctionWeb.Controllers
                         var ac = new Auction()
                         {
                             IDPro = pro.ID,
-                            IDUser = pro.lastuser,
+                            IDUser = user.ID,
                             Username = user.Username,
                             Fullname = user.Name,
                             Time = DateTime.Now,
@@ -96,6 +109,12 @@ namespace AuctionWeb.Controllers
                             ctx.SaveChanges();
                             ViewBag.info = "successfully!!!";
                         }
+                        //create an email                          
+                        emailsetprice.To = user.Email;
+                        emailsetprice.Name = user.Name;
+                        emailsetprice.ProName = pro.Name;
+                        emailsetprice.price = pro.PriceDisplay;
+                        emailsetprice.Send();
                     }
                 }
                 else
@@ -145,7 +164,8 @@ namespace AuctionWeb.Controllers
                     IDProduct = idpro,
                     IDUser = iduser,
                 };
-
+                //get onwer
+                Auction currentowner = ctx.Auctions.Where(a => a.own == true && a.IDPro == idpro).FirstOrDefault();
                 //create an email                
                 emailkick.To = CurrentContext.GetCurUser().Email;
                 emailkick.Name = user.Name;
@@ -153,8 +173,12 @@ namespace AuctionWeb.Controllers
                 emailkick.Send();
                 ctx.BannedUsers.Add(ban);
                 ctx.SaveChanges();
-            }
-
+                //check if we dont kick the onwer
+                if (currentowner.IDUser != user.ID)
+                {
+                    return RedirectToAction("SettedBid", "Auction", new { id = idpro });
+                }
+            }           
             using (var update = new AuctionSiteDBEntities())
             {
                 var currentowner = update.Auctions.Where(a => a.own == true && a.IDPro == idpro).FirstOrDefault();
@@ -182,7 +206,7 @@ namespace AuctionWeb.Controllers
                     update.SaveChanges();                   
                 }               
             }
-            return RedirectToAction("SettedBid", "Auction", new { id = idpro }); // dong nay nam o trnag update.save
+            return RedirectToAction("SettedBid", "Auction", new { id = idpro }); 
         }
         // GET: Auction/ShowWin
         public ActionResult ShowWin()

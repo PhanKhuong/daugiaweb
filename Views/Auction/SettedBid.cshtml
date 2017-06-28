@@ -19,7 +19,16 @@
     <link href="~/Assets/boostrap-datepicker/css/datatable.css" rel="stylesheet" />
 }
 
-
+@if (ViewBag.suss != null)
+{
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-success">
+            <strong>@ViewBag.suss</strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+}
 <table id="availablepros" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>

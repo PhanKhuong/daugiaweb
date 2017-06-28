@@ -17,8 +17,8 @@ namespace AuctionWeb.Controllers
             using (var ctx = new AuctionSiteDBEntities())
             {
                 var listget = ctx.Auctions.ToList();
-                var listmax = ctx.Products.Where(p => p.Bought == false).OrderByDescending(p => p.PriceDisplay).ToList().Take(5);
-                var listend = ctx.Products.Where(p => p.Bought == false)
+                var listmax = ctx.Products.Where(p => p.Bought == false && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost, p.IntervalTime))).OrderByDescending(p => p.PriceDisplay).ToList().Take(5);
+                var listend = ctx.Products.Where(p => p.Bought == false && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost, p.IntervalTime)))
                     .OrderBy(p => (EntityFunctions.DiffSeconds(DateTime.Now, EntityFunctions.AddDays(p.TimePost, p.IntervalTime)))).ToList().Take(5);
                 var TopSetPriceList = listget.GroupBy(a => a.IDPro).OrderByDescending(a => a.Key).ToList().Take(5);             
                 foreach (var id in TopSetPriceList)
