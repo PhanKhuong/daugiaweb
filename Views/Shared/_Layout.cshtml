@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using AuctionWeb.Helpers;
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@RenderSection("view_title")</title>
@@ -53,29 +55,80 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <input type="hidden" name="cmd" value="_cart" />
                     <input type="hidden" name="display" value="1" />
                     <input type="submit" name="submit" value="View your cart" class="button" />
-                </fieldset>
+                </fieldset>             
             </form>
         </div>
         <div class="w3l_header_right">
             <ul>
                 <li class="dropdown profile_details_drop">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-                    <div class="mega-dropdown-menu">
-                        <div class="w3ls_vegetables">
-                            <ul class="dropdown-menu drp-mnu">
-                                <li><a href="@Url.Action("Login","Account")">Login</a></li>
-                                <li><a href="@Url.Action("Register","Account")">Sign Up</a></li>
-                            </ul>
+                    @if (CurrentContext.Islogged() == false)
+                    {
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+                        <div class="mega-dropdown-menu">
+                            <div class="w3ls_vegetables">
+                                <ul class="dropdown-menu drp-mnu">
+                                    <li><a href="@Url.Action("Login","Account")">Sign In</a></li>
+                                    <li><a href="@Url.Action("Register","Account")">Sign Up</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span> @CurrentContext.GetCurUser().Name</a>
+                        <div class="mega-dropdown-menu">
+                            <div class="w3ls_vegetables">
+                                <ul class="dropdown-menu drp-mnu">
+                                    @if (CurrentContext.GetCurUser().Permission == 0)
+                                    {
+                                        <li id="askpermission"><a href="javascript:;">Ask For Selling in 7 days</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("ShowWin","Auction")">Won Products</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("Profile","Account")">User Information</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("ChangeInfo","Account")">Change User Information</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
+                                    }
+                                    else if ((CurrentContext.GetCurUser().Permission) == 1 && (CurrentContext.GetCurUser().Username.Equals("administrator") == true))
+                                    {
+                                        <li><a href="@Url.Action("WaitingUsers","MAccount")">Manage Selling Asking</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("Index","MCategories")">Manage Categories</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("Delete","MAccount")">Manage Users</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("InTime","MProduct")">Products Available</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("Add","MProduct")">Add Products</a></li>
+                                        <li role="separator" class="divider"></li>                        
+                                        <li><a href="@Url.Action("Profile","Account")">User Information</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("ChangeInfo","Account")">Change User Information</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a id="logoutLink" href="javascript:;">Logout</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
                 </li>
             </ul>
         </div>
         <div class="w3l_header_right1">
-            <h2><a href="mail.html">Contact Us</a></h2>
+            <h1><a class="btn btn-success" href="@Url.Action("WatchList","MProduct")">Watched List</a></h1>
         </div>
-        <div class="clearfix"> </div>
-    </div>
+            <div class="clearfix"> </div>
+        </div>
     <!-- script-for sticky-nav -->
     <script>
         $(document).ready(function () {
@@ -88,14 +141,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $(".agileits_header").removeClass("fixed");
                 }
             });
-
         });
     </script>
     <!-- //script-for sticky-nav -->
     <div class="logo_products">
         <div class="container">
             <div class="w3ls_logo_products_left">
-                <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
+                <h1><a href="@Url.Action("Index", "Home")"><span>Hit</span>Auction</a></h1>
             </div>
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
@@ -134,59 +186,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        @RenderBody()
+        <div class="w3l_banner_nav_right">
+            @RenderBody()
+        </div>
         <div class="clearfix"></div>
         </div>
     <!-- footer -->
     <div class="footer">
         <div class="container">
-            <div class="col-md-3 w3_footer_grid">
-                <h3>information</h3>
-                <ul class="w3_footer_grid_list">
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="products.html">Best Deals</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="short-codes.html">Short Codes</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>policy info</h3>
-                <ul class="w3_footer_grid_list">
-                    <li><a href="faqs.html">FAQ</a></li>
-                    <li><a href="privacy.html">privacy policy</a></li>
-                    <li><a href="privacy.html">terms of use</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>what in stores</h3>
-                <ul class="w3_footer_grid_list">
-                    <li><a href="pet.html">Pet Food</a></li>
-                    <li><a href="frozen.html">Frozen Snacks</a></li>
-                    <li><a href="kitchen.html">Kitchen</a></li>
-                    <li><a href="products.html">Branded Foods</a></li>
-                    <li><a href="household.html">Households</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>twitter posts</h3>
-                <ul class="w3_footer_grid_list1">
-                    <li>
-                        <label class="fa fa-twitter" aria-hidden="true"></label><i>01 day ago</i><span>
-                            Non numquam <a href="#">http://sd.ds/13jklf#</a>
-                            eius modi tempora incidunt ut labore et
-                            <a href="#">http://sd.ds/1389kjklf#</a>quo nulla.
-                        </span>
-                    </li>
-                    <li>
-                        <label class="fa fa-twitter" aria-hidden="true"></label><i>02 day ago</i><span>
-                            Con numquam <a href="#">http://fd.uf/56hfg#</a>
-                            eius modi tempora incidunt ut labore et
-                            <a href="#">http://fd.uf/56hfg#</a>quo nulla.
-                        </span>
-                    </li>
-                </ul>
-            </div>
             <div class="clearfix"> </div>
             <div class="agile_footer_grids">
                 <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
@@ -210,7 +217,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"> </div>
             </div>
             <div class="wthree_footer_copy">
-                <p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                <h3><font color="white">Hit Auction - Win everything by your own way</font></h3>
             </div>
         </div>
     </div>
@@ -259,17 +266,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             paypal.minicart.reset();
         }
     </script>
+    <form id="frmLogout" method="post" action="@Url.Action("Logout", "Account")"></form>
     <script type="text/javascript">
-        $('#logoutLink').on('click', function () {
-            $('#frmLogout').submit();
-        });
-        $('#ref_watchlist').on('click', function () {
-            $('#submit_watchlist').submit();
-        });
-        $('#askpermission').on('click', function () {
-            $('#submit_askpermission').submit();
-        });
+    $('#logoutLink').on('click', function () {
+        $('#frmLogout').submit();
+    });
+    $('#ref_watchlist').on('click', function () {
+        $('#submit_watchlist').submit();
+    });
+    $('#askpermission').on('click', function () {
+        $('#submit_askpermission').submit();
+    });
     </script>
+    <!--ask permission form-->
+    <form id="submit_askpermission" method="post" action="@Url.Action("AskPermission","MAccount")"></form>
+    <!---->
     @RenderSection("js", false)
 </body>
 </html>

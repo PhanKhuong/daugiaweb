@@ -12,61 +12,60 @@
             $('#availablepros').DataTable();
         });
     </script>
-<script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
 <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
 }
 
 @section css {
-<link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+<link href="~/Assets/boostrap-datepicker/css/datatable.css" rel="stylesheet" />
 }
- 
 
-<table id="availablepros" class="display" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Details</th>
-            <th>Setted Price</th>
-            <th>Description</th>
-            <th>Edit Description</th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Details</th>
-            <th>Setted Price</th>
-            <th>Description</th>
-            <th>Edit Description</th>
-        </tr>
-    </tfoot>
-    <tbody>
-        @foreach (var p in Model)
-        {
-            <tr>
-                <td>@p.Name</td>
-                <td><img src="~/Img/products/@p.ID/main2.jpg" height="180" width="240" /></td>
-                <td>
-                    <a href="@Url.Action("Details", "Products", new {id = @p.ID })" class=" btn btn-success" role="button">
-                        Details
-                    </a>
-                </td>
-                <td>
-                    <a href="@Url.Action("SettedBid", "Auction", new {id = @p.ID })" class=" btn btn-success" role="button">
-                        Setted Bid
-                    </a>
-                </td>
-                <td>
-                    @Html.Raw(HttpUtility.HtmlDecode(p.Description))
-                </td>
-                <td>
-                    <a href="@Url.Action("EditDes", "MProduct", new {id = @p.ID })" class=" btn btn-success" role="button">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row col-sm-10">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+        <table id="availablepros" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Details</th>
+                    <th>Setted Price</th>
+                    <th>Edit Description</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Details</th>
+                    <th>Setted Price</th>
+                    <th>Edit Description</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+                        <td><img src="~/Img/products/@p.ID/main2.jpg" height="180" width="240" /></td>
+                        <td>
+                            <a href="@Url.Action("Details", "Products", new {id = @p.ID })" class=" btn btn-success" role="button">
+                                Details
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("SettedBid", "Auction", new {id = @p.ID })" class=" btn btn-success" role="button">
+                                Setted Bid
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("EditDes", "MProduct", new {id = @p.ID })" class=" btn btn-success" role="button">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+ 

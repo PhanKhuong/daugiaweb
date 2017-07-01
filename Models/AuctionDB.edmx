@@ -100,6 +100,14 @@
           <Property Name="IDProducts" Type="int" Nullable="false" />
           <Property Name="IDUsers" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUserRating" Type="int" />
+          <Property Name="IDUser" Type="int" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="ID" />
@@ -130,6 +138,15 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Username" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="Won">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="PriceDisplay" Type="money" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityContainer Name="AuctionSiteDBModelStoreContainer">
           <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
@@ -140,8 +157,10 @@
           <EntitySet Name="HistoryPrice" EntityType="Self.HistoryPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersAsking" EntityType="Self.UsersAsking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Won" EntityType="Self.Won" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -243,6 +262,14 @@
           <Property Name="IDProducts" Type="Int32" Nullable="false" />
           <Property Name="IDUsers" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUserRating" Type="Int32" />
+          <Property Name="IDUser" Type="Int32" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -273,6 +300,15 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Won">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Auctions" EntityType="Self.Auction" />
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
@@ -283,8 +319,10 @@
           <EntitySet Name="HistoryPrices" EntityType="Self.HistoryPrice" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsInCharges" EntityType="Self.ProductsInCharge" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UsersAskings" EntityType="Self.UsersAsking" />
+          <EntitySet Name="Wons" EntityType="Self.Won" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -391,6 +429,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUserRating" ColumnName="IDUserRating" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AuctionSiteDBModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -420,6 +467,16 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wons">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.Won">
+              <MappingFragment StoreEntitySet="Won">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -95,6 +95,14 @@
     <Property Name="IDProducts" Type="Int32" Nullable="false" />
     <Property Name="IDUsers" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDUserRating" Type="Int32" />
+    <Property Name="IDUser" Type="Int32" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="ID" />
@@ -125,6 +133,15 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="Won">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDUser" Type="Int32" />
+    <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityContainer Name="AuctionSiteDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Auctions" EntityType="Self.Auction" />
     <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
@@ -135,7 +152,9 @@
     <EntitySet Name="HistoryPrices" EntityType="Self.HistoryPrice" />
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="ProductsInCharges" EntityType="Self.ProductsInCharge" />
+    <EntitySet Name="Ratings" EntityType="Self.Rating" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="UsersAskings" EntityType="Self.UsersAsking" />
+    <EntitySet Name="Wons" EntityType="Self.Won" />
   </EntityContainer>
 </Schema>

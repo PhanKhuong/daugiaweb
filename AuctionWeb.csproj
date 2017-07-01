@@ -112,7 +112,7 @@
     <Content Include="Assets\boostrap-datepicker\css\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Assets\boostrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Assets\boostrap-datepicker\js\bootstrap-datepicker.min.js" />
-    <Content Include="Assets\boostrap-datepicker\css\d.css" />
+    <Content Include="Assets\boostrap-datepicker\css\datatable.css" />
     <Content Include="Assets\boostrap-datepicker\js\jquery-1.12.4.js" />
     <Content Include="Assets\boostrap-datepicker\js\jquery.dataTabsles.min.js" />
     <Content Include="Assets\boostrap-datepicker\locales\bootstrap-datepicker-en-CA.min.js" />
@@ -604,6 +604,12 @@
     <Content Include="Assets\boostrap-datepicker\css\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Assets\boostrap-datepicker\css\bootstrap-datepicker3.css.map" />
     <Content Include="Assets\boostrap-datepicker\css\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="Assets\template\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\template\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\template\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\template\fonts\FontAwesome.otf" />
+    <Content Include="Assets\template\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\template\fonts\glyphicons-halflings-regular.woff2" />
     <EntityDeploy Include="Models\AuctionDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AuctionDB.Designer.cs</LastGenOutput>
@@ -611,12 +617,6 @@
     <Content Include="Models\AuctionDB.edmx.diagram">
       <DependentUpon>AuctionDB.edmx</DependentUpon>
     </Content>
-    <Content Include="Assets\template\fonts\fontawesome-webfont.eot" />
-    <Content Include="Assets\template\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Assets\template\fonts\fontawesome-webfont.woff" />
-    <Content Include="Assets\template\fonts\FontAwesome.otf" />
-    <Content Include="Assets\template\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Assets\template\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -759,7 +759,6 @@
     <Content Include="Assets\tinymce\tinymce.js" />
     <Content Include="Assets\tinymce\tinymce.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Categories\ListOfCats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -798,7 +797,6 @@
     <Compile Include="Models\BannedUser.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BargainVM.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
@@ -814,39 +812,37 @@
     <Compile Include="Models\HistoryPrice.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductsInCharge.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductVM.cs" />
-    <Compile Include="Models\RegisterVM.cs" />
+    <Compile Include="Models\Rating.cs">
+      <DependentUpon>AuctionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersAsking.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Won.cs">
+      <DependentUpon>AuctionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BargainVM.cs" />
+    <Compile Include="Models\LoginVM.cs" />
+    <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\RatingVM.cs" />
+    <Compile Include="Models\RegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Products\ByCat.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Account\Profile.cshtml" />
-    <Content Include="Views\MProduct\Add.cshtml" />
     <Content Include="Assets\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Assets\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Assets\tinymce\skins\lightgray\fonts\tinymce.eot" />
@@ -854,19 +850,31 @@
     <Content Include="Assets\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
     <Content Include="Assets\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Assets\tinymce\langs\readme.md" />
+    <Content Include="Views\Account\ChangeInfo.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Auction\Index.cshtml" />
+    <Content Include="Views\Auction\SettedBid.cshtml" />
+    <Content Include="Views\Categories\ListOfCats.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\MAccount\Accept.cshtml" />
+    <Content Include="Views\MAccount\AskPermission.cshtml" />
+    <Content Include="Views\MAccount\Delete.cshtml" />
+    <Content Include="Views\MAccount\WaitingUsers.cshtml" />
+    <Content Include="Views\MCategories\Index.cshtml" />
+    <Content Include="Views\MProduct\Add.cshtml" />
+    <Content Include="Views\MProduct\EditDes.cshtml" />
     <Content Include="Views\MProduct\Index.cshtml" />
     <Content Include="Views\MProduct\InTime.cshtml" />
     <Content Include="Views\MProduct\WatchList.cshtml" />
-    <Content Include="Views\MAccount\AskPermission.cshtml" />
-    <Content Include="Views\MAccount\WaitingUsers.cshtml" />
-    <Content Include="Views\MAccount\Delete.cshtml" />
-    <Content Include="Views\MCategories\Index.cshtml" />
-    <Content Include="Views\Auction\Index.cshtml" />
-    <Content Include="Views\MAccount\Accept.cshtml" />
-    <Content Include="Views\MProduct\EditDes.cshtml" />
-    <Content Include="Views\Account\ChangeInfo.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Auction\SettedBid.cshtml" />
+    <Content Include="Views\Products\ByCat.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Auction\ShowWin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

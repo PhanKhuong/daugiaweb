@@ -47,6 +47,7 @@ namespace AuctionWeb.Controllers
                 vm.HighestKeeper = null;
                 vm.EvaluationPoint = null;
                 vm.TimePost = DateTime.Now;
+                vm.Bought = false;
                 ctx.Products.Add(vm);
                 ctx.SaveChanges();
 

@@ -28,38 +28,19 @@
 }
 
 <form class="form-horizontal" method="post" action="" id="addProductForm" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="txtDes" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-10">
-            <textarea class="form-group" id="txtDes" name="Descriptionchanges">Edit[@Model.EditDate.Date] @ViewBag.raw</textarea>
-        </div>
-    </div>
-    <div class="form-group" hidden>
-        <label for="txtDes" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-10">
-            <textarea class="form-group" id="txtDes" name="Description">@Model.Content</textarea>
-        </div>
-    </div>
-    <div class="form-group" hidden>
-        <label for="txtDes" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-group" name="ID" value="@Model.IDPro"/>
-        </div>
-    </div>
-    <div class="form-group" hidden>
-        <label for="txtDes" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-group" name="IDMain" value="@Model.ID" />
-        </div>
-    </div>
+
+    <textarea class="form-group" id="txtDes" placeholder="Description" name="Descriptionchanges">Edit[@Model.EditDate.Date] @ViewBag.raw</textarea>
+    <div hidden><textarea class="form-group" id="txtDes" name="Description">@Model.Content</textarea></div>
+    <div hidden><input type="text" class="form-group" name="ID" value="@Model.IDPro" /></div>
+    <div hidden><input type="text" class="form-group" name="IDMain" value="@Model.ID" /></div>
     <div class="form-group">
         <div class="col-sm-10 col-sm-offset-2">
             <button type="submit" class="btn btn-danger">
                 <i class="fa fa-check"></i>&nbsp;Save
             </button>
-            <a href="@Url.Action("InTime","MProduct")" class="btn btn-success"
+            <a href="@Url.Action("InTime","MProduct")" class="btn btn-success">
                <i class="fa fa-reply"></i>&nbsp;List of Products
             </a>
         </div>
-    </div>
+    </div>   
 </form>

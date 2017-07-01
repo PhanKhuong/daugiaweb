@@ -48,60 +48,163 @@
 }
 else
 {
-    <div class="w3l_banner_nav_right">
-        <div class="agileinfo_single">
-            <h5>@Model.Name</h5>
-            <div class="col-md-4 agileinfo_single_left">
-                @* if have a problem, if responsive to class of img *@
-                <div class="w3-content w3-section" style="max-width:500px">
-                    <img class="mySlides w3-animate-top" src="~/Img/products/@Model.ID/main.jpg" style="width:100%">
-                    <img class="mySlides w3-animate-bottom" src="~/Img/products/@Model.ID/main2.jpg" style="width:100%">
-                    <img class="mySlides w3-animate-top" src="~/Img/products/@Model.ID/main3.jpg" style="width:100%">
-                    <img class="mySlides w3-animate-bottom" src="img_rr_04.jpg" style="width:100%">
-                </div>
+    <div class="agileinfo_single">
+        <h5>@Model.Name</h5>
+        <div class="col-md-4 agileinfo_single_left">
+            @* if have a problem, if responsive to class of img *@
+            <div class="w3-content w3-section" style="max-width:500px">
+                <img class="mySlides w3-animate-top" src="~/Img/products/@Model.ID/main.jpg" style="width:100%">
+                <img class="mySlides w3-animate-bottom" src="~/Img/products/@Model.ID/main2.jpg" style="width:100%">
+                <img class="mySlides w3-animate-top" src="~/Img/products/@Model.ID/main3.jpg" style="width:100%">
             </div>
-            <div class="col-md-8 agileinfo_single_right">
-                <div class="rating1">
-                    <span class="starRating">
-                        <input id="rating5" type="radio" name="rating" value="5">
-                        <label for="rating5">5</label>
-                        <input id="rating4" type="radio" name="rating" value="4">
-                        <label for="rating4">4</label>
-                        <input id="rating3" type="radio" name="rating" value="3" checked>
-                        <label for="rating3">3</label>
-                        <input id="rating2" type="radio" name="rating" value="2">
-                        <label for="rating2">2</label>
-                        <input id="rating1" type="radio" name="rating" value="1">
-                        <label for="rating1">1</label>
-                    </span>
-                </div>
-                <div class="w3agile_description">
-                    <h4>Description :</h4>
-                    <p>@Model.Description</p>
-                </div>
-                <div class="snipcart-item block">
-                    <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                        <h4>@Model.PriceDisplay</h4>
-                    </div>
-                    <div class="snipcart-details agileinfo_single_right_details">
-                        <form action="#" method="post">
-                            <fieldset>
-                                <input type="hidden" name="cmd" value="_cart" />
-                                <input type="hidden" name="add" value="1" />
-                                <input type="hidden" name="business" value=" " />
-                                <input type="hidden" name="item_name" value="pulao basmati rice" />
-                                <input type="hidden" name="amount" value="21.00" />
-                                <input type="hidden" name="discount_amount" value="1.00" />
-                                <input type="hidden" name="currency_code" value="USD" />
-                                <input type="hidden" name="return" value=" " />
-                                <input type="hidden" name="cancel_return" value=" " />
-                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
         </div>
+        <div class="col-md-8 agileinfo_single_right">
+            <div class="rating1">
+                <span class="starRating">
+                    <input id="rating5" type="radio" name="rating" value="5">
+                    <label for="rating5">5</label>
+                    <input id="rating4" type="radio" name="rating" value="4">
+                    <label for="rating4">4</label>
+                    <input id="rating3" type="radio" name="rating" value="3" checked>
+                    <label for="rating3">3</label>
+                    <input id="rating2" type="radio" name="rating" value="2">
+                    <label for="rating2">2</label>
+                    <input id="rating1" type="radio" name="rating" value="1">
+                    <label for="rating1">1</label>
+                </span>             
+            </div>
+            <div><a id="ref_watchlist" class="btn btn-success">Add To Favorite</a></div>
+            <div class="w3agile_description">
+                <h4>Description :</h4>
+                <p>@Model.Description</p>
+            </div>
+            <div class="snipcart-item block">
+                <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                    <h4>Start Price: @Model.StartPrice</h4>
+                    <h4>Current Price: @Model.PriceDisplay</h4>
+                    <h4>Buy now with: @Model.EndPrice</h4>
+                    <h4>Step Price: @Model.StepPrice</h4>
+                    <h4>Time End: @Model.TimePost.AddDays(Model.IntervalTime)</h4>
+                </div>
+                <div class="snipcart-details agileinfo_single_right_details">
+                    <form action="#" method="post">
+                        <fieldset>
+                            <input type="hidden" name="cmd" value="_cart" />
+                            <input type="hidden" name="add" value="1" />
+                            <input type="hidden" name="business" value=" " />
+                            <input type="hidden" name="item_name" value="pulao basmati rice" />
+                            <input type="hidden" name="amount" value="21.00" />
+                            <input type="hidden" name="discount_amount" value="1.00" />
+                            <input type="hidden" name="currency_code" value="USD" />
+                            <input type="hidden" name="return" value=" " />
+                            <input type="hidden" name="cancel_return" value=" " />
+                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+        <!--hidden form to submit-->
+        <form id="submit_watchlist" method="post" action="@Url.Action("WatchList","MProduct")">
+            <div class="form-group">
+                <input value="@Model.ID" name="ID" hidden />
+            </div>
+            <div class="form-group">
+                <input value="@Model.UserID" name="UserID" hidden />
+            </div>
+        </form>
+        <!--checkuser-->
+        @if (CurrentContext.Islogged() == true)
+                {
+                    double pos = CurrentContext.GetCurUser().positivePoint;
+                    double nav = CurrentContext.GetCurUser().negativePoint;
+                    if (((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
+                    && CurrentContext.GetCurUser().ID != Model.lastuser && CurrentContext.GetCurUser().ID != Model.UserID)
+                    {
+                <hr />
+                    <form class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction", new { Product = Model })">
+                        <div class="form-group">
+                            <label class="col-sm-8 control-label">How much you could you pay for it?</label>
+                            <div class="col-sm-4">
+                                @{
+                                    decimal? recommend = Model.PriceDisplay + Model.StepPrice;
+                                }
+                                <input type="text" class="form-control" placeholder="Recommend Price: @recommend" name="Price">
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <div class="col-sm-4" hidden>
+
+                                <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
+                            </div>
+                        </div>
+                        @if (ViewBag.CheckBanned == true && CurrentContext.Islogged() == true)
+                        {
+                            <div class="alert alert-warning">
+                                <strong>You have no right anymore to race for this product!!!</strong>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
+                                    <!---->
+                                    <div id="output"></div>
+
+                                    <div id="overlay" class="web_dialog_overlay"></div>
+
+                                    <div id="dialog" class="web_dialog">
+                                        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+                                            <tr>
+                                                <td class="web_dialog_title">Confrimation</td>
+                                                <td class="web_dialog_title align_right">
+                                                    <a href="#" id="btnClose">Close</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left: 15px;">
+                                                    <b>Click yes to confirm again??</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center;">
+                                                    <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!---->
+                                </div>
+                            </div>
+                        }
+                    </form>
+                                    }
+                                    else
+                                    {
+                                        <br />
+                                        <br />
+                                        <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <br />
+                                        <br />
+                                        <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
+                                    }
     </div>
 }

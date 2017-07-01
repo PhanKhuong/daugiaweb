@@ -24,96 +24,98 @@
     </script>
 }
 
-<form class="form-horizontal" method="post" action="" id="addProductForm" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="txtProName" class="col-sm-2 control-label">Product Name</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="txtProName" name="Name" />
+<div class="row col-sm-10">
+    <form class="form-horizontal" method="post" action="" id="addProductForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="txtProName" class="col-sm-2 control-label">Product Name</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtProName" name="Name" />
+            </div>
+            <label for="CatID" class="col-sm-2 control-label">Category</label>
+            <div class="col-sm-4">
+                <select class="form-control selectpicker" name="IDCat">
+                    @foreach (var c in ViewBag.Categories)
+                    {
+                        <option value="@c.ID">@c.Name</option>
+                    }
+                </select>
+            </div>
         </div>
-        <label for="CatID" class="col-sm-2 control-label">Category</label>
-        <div class="col-sm-4">
-            <select class="form-control selectpicker" name="IDCat">
-                @foreach(var c in ViewBag.Categories)
-                {
-                    <option value="@c.ID">@c.Name</option>
-                }
-            </select>
+        <div class="form-group">
+            <label for="StartPrice" class="col-sm-2 control-label"> Start Price</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="StartPrice" name="StartPrice" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="StartPrice" class="col-sm-2 control-label"> Start Price</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="StartPrice" name="StartPrice" />
+        <div class="form-group">
+            <label for="StepPrice" class="col-sm-2 control-label">Step Price</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="StepPrice" name="StepPrice" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="StepPrice" class="col-sm-2 control-label">Step Price</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="StepPrice" name="StepPrice" />
+        <div class="form-group">
+            <label for="EndPrice" class="col-sm-2 control-label">End Price</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="EndPrice" name="EndPrice" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="EndPrice" class="col-sm-2 control-label">End Price</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="EndPrice" name="EndPrice" />
+        <div class="form-group">
+            <label for="IntervalTime" class="col-sm-2 control-label">Selling Time</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="IntervalTime" placeholder="day(s)" name="IntervalTime" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="IntervalTime" class="col-sm-2 control-label">Selling Time</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="IntervalTime" placeholder="day(s)" name="IntervalTime" />
+        <div class="form-group">
+            <label for="ExtendTime" class="col-sm-2 control-label">Extend Time</label>
+            <div class="col-sm-2">
+                <label>
+                    <input type="radio" name="ExtendTime" value="true">
+                    Yes
+                </label><br />
+                <label>
+                    <input type="radio" name="ExtendTime" value="false">
+                    No
+                </label><br />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="ExtendTime" class="col-sm-2 control-label">Extend Time</label>
-        <div class="col-sm-2">
-            <label>
-                <input type="radio" name="ExtendTime" value="true">
-                Yes
-            </label><br />
-            <label>
-                <input type="radio" name="ExtendTime" value="false">
-                No
-            </label><br />
+        <div class="form-group">
+            <label for="Firstimg" class="col-sm-2 control-label">First Image</label>
+            <div class="col-sm-4">
+                <input type="file" id="Firstimg" name="Firstimg" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Firstimg" class="col-sm-2 control-label">First Image</label>
-        <div class="col-sm-4">
-            <input type="file" id="Firstimg" name="Firstimg"/>
+        <div class="form-group">
+            <label for="Secondimg" class="col-sm-2 control-label">Second Image</label>
+            <div class="col-sm-4">
+                <input type="file" id="Secondimg" name="Secondimg" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Secondimg" class="col-sm-2 control-label">Second Image</label>
-        <div class="col-sm-4">
-            <input type="file" id="Secondimg" name="Secondimg"/>
+        <div class="form-group">
+            <label for="Thirdimg" class="col-sm-2 control-label">Third Image</label>
+            <div class="col-sm-4">
+                <input type="file" id="Thirdimg" name="Thirdimg" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Thirdimg" class="col-sm-2 control-label">Third Image</label>
-        <div class="col-sm-4">
-            <input type="file" id="Thirdimg" name="Thirdimg"/>
+        <div class="form-group">
+            <label for="txtDes" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-group" id="txtDes" name="Description"></textarea>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="txtDes" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-10">
-            <textarea class="form-group" id="txtDes" name="Description"></textarea>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="text" value="@CurrentContext.GetCurUser().ID" name="UserID" hidden />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-10">
-            <input type="text" value="@CurrentContext.GetCurUser().ID" name="UserID" hidden/>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-10 col-sm-offset-2">
-            <button type="submit" class="btn btn-danger">
-                <i class="fa fa-check"></i>&nbsp;Save
-            </button>
-            <a href="@Url.Action("Index","MProduct")" class="btn btn-success"
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-check"></i>&nbsp;Save
+                </button>
+                <a href="@Url.Action("Index","MProduct")" class="btn btn-success"
                <i class="fa fa-reply"></i>&nbsp;List of Products
             </a>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

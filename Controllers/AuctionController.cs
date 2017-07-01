@@ -58,16 +58,16 @@ namespace AuctionWeb.Controllers
                             Time = DateTime.Now,
                             MaxPrice = vm.Price,
                         };
-                        if(takeowner == null)
+                        if (takeowner == null)
                         {
-                            ac.own = true;                           
+                            ac.own = true;
                             pro.lastuser = user.ID;
                             pro.PriceDisplay = ac.MaxPrice;
-                            ctx.Auctions.Add(ac);                           
+                            ctx.Auctions.Add(ac);
                             ctx.SaveChanges();
                             ViewBag.info = "successfully!!!";
                         }
-                        else if(takeowner.MaxPrice < ac.MaxPrice)
+                        else if (takeowner.MaxPrice < ac.MaxPrice)
                         {
                             ac.own = true;
                             //mark lastuser has set price for product
@@ -77,7 +77,7 @@ namespace AuctionWeb.Controllers
                             ctx.Auctions.Add(ac);
                             ctx.SaveChanges();
                             ViewBag.info = "successfully!!!";
-                        }                    
+                        }
                     }
                 }
                 else
@@ -93,24 +93,24 @@ namespace AuctionWeb.Controllers
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
-                    var list = ctx.Auctions.Where(u => u.IDPro == vm.ID).ToList();
-                    //
-                    //
-                    foreach (var item in list)
-                    {
+                var list = ctx.Auctions.Where(u => u.IDPro == vm.ID).ToList();
+                //
+                //
+                foreach (var item in list)
+                {
                     //if we just have 1 user is racing for this product, Encryption is no needed
                     if (item.own == false)
-                        {
-                            string temp = new string('*', item.Fullname.Count());
-                            var aStringBuilder = new StringBuilder(temp);
-                            aStringBuilder.Replace('*', item.Fullname[item.Fullname.Length - 1], temp.Count() - 1, 1);
-                            item.Fullname = aStringBuilder.ToString();
-                        }
-                        var hm = new DateTime(item.Time.Value.Year, item.Time.Value.Month, item.Time.Value.Day, item.Time.Value.Hour, item.Time.Value.Minute, 0);
-                        item.Time = hm;
+                    {
+                        string temp = new string('*', item.Fullname.Count());
+                        var aStringBuilder = new StringBuilder(temp);
+                        aStringBuilder.Replace('*', item.Fullname[item.Fullname.Length - 1], temp.Count() - 1, 1);
+                        item.Fullname = aStringBuilder.ToString();
                     }
-                    return View(list);
-                }                         
+                    var hm = new DateTime(item.Time.Value.Year, item.Time.Value.Month, item.Time.Value.Day, item.Time.Value.Hour, item.Time.Value.Minute, 0);
+                    item.Time = hm;
+                }
+                return View(list);
+            }
         }
 
         // GET: Auction/BanUser
@@ -136,14 +136,14 @@ namespace AuctionWeb.Controllers
                     .Where(p => p.IDPro == idpro)
                     .Skip(1).FirstOrDefault();
                 //more than 1 price setting
-                if(secondMax != null)
+                if (secondMax != null)
                 {
                     secondMax.own = true;
                     //udpate maxprice of product
                     Product pro = update.Products.Where(p => p.ID == idpro).FirstOrDefault<Product>();
                     pro.PriceDisplay = secondMax.MaxPrice;
                     pro.lastuser = secondMax.IDUser;
-                    update.SaveChanges();                  
+                    update.SaveChanges();
                 }
                 //if we just have 1 setting price for this product then second will be turnned into null 
                 else
@@ -152,10 +152,66 @@ namespace AuctionWeb.Controllers
                     Product pro = update.Products.Where(p => p.ID == idpro).FirstOrDefault<Product>();
                     pro.PriceDisplay = pro.StartPrice;
                     pro.lastuser = null;
-                    update.SaveChanges();                   
+                    update.SaveChanges();
                 }
                 return RedirectToAction("SettedBid", "Auction", new { id = idpro });
             }
+        }
+        // GET: Auction/ShowWin
+        public ActionResult ShowWin()
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                int id = CurrentContext.GetCurUser().ID;
+                var list = (from p in ctx.Products
+                            join u in ctx.Users
+                            on p.UserID equals u.ID
+                            where p.lastuser == id && p.Bought == true
+                            select new ProductVM
+                            {
+                                UserID = p.UserID,
+                                ID = p.ID,
+                                Name = p.Name,
+                                PriceDisplay = p.PriceDisplay,
+                                Description = u.Name,
+                            }).ToList();
+                return View(list);
+            }
+        }
+
+        // GET: Auction/Rating
+        public ActionResult Rating(RatingVM vm)
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                int idcurrent = CurrentContext.GetCurUser().ID;
+                bool check = ctx.Ratings.Any(r => r.IDUser == vm.ID && r.IDUserRating == idcurrent);
+                if(check == true)
+                {
+                    TempData["mess"] = "You Have already rate for this seller!!!";
+                    return RedirectToAction("ShowWin", "Auction");
+                }
+                int id = vm.ID;
+                User user = ctx.Users.Where(u => u.ID == id).FirstOrDefault<User>();
+                if (vm.negativePoint == -1)
+                {
+                    user.negativePoint++;
+                }
+                else
+                {
+                    user.positivePoint++;
+                }
+                //save rating
+                var rating = new Rating()
+                {
+                    IDUser = vm.ID,
+                    IDUserRating = CurrentContext.GetCurUser().ID,
+                };
+                ctx.Ratings.Add(rating);
+                ctx.SaveChanges();
+            }
+            TempData["mess"] = "Thanks for your rating!!!";
+            return RedirectToAction("ShowWin", "Auction");
         }
     }
 }

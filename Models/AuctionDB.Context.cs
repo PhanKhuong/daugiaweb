@@ -34,7 +34,9 @@ namespace AuctionWeb.Models
         public virtual DbSet<HistoryPrice> HistoryPrices { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductsInCharge> ProductsInCharges { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAsking> UsersAskings { get; set; }
+        public virtual DbSet<Won> Wons { get; set; }
     }
 }

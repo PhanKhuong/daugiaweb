@@ -100,6 +100,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.Rating">
+        <MappingFragment StoreEntitySet="Rating">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDUserRating" ColumnName="IDUserRating" />
+          <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="AuctionSiteDBModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -129,6 +138,16 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wons">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.Won">
+        <MappingFragment StoreEntitySet="Won">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+          <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

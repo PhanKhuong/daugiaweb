@@ -95,6 +95,14 @@
     <Property Name="IDProducts" Type="int" Nullable="false" />
     <Property Name="IDUsers" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDUserRating" Type="int" />
+    <Property Name="IDUser" Type="int" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="ID" />
@@ -125,6 +133,15 @@
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Username" Type="varchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="Won">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDUser" Type="int" />
+    <Property Name="PriceDisplay" Type="money" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityContainer Name="AuctionSiteDBModelStoreContainer">
     <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
@@ -135,7 +152,9 @@
     <EntitySet Name="HistoryPrice" EntityType="Self.HistoryPrice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductsInCharge" EntityType="Self.ProductsInCharge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersAsking" EntityType="Self.UsersAsking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Won" EntityType="Self.Won" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

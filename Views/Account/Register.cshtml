@@ -89,38 +89,37 @@
     </div>
 }
 
-<div class="w3l_banner_nav_right">
-    <!-- login -->
-    <div class="w3_login">
-        <h3>Sign Up</h3>
-        <div class="w3_login_module">
-            <div class="module form-module">
-                <div class="toggle">
-                    <i class="fa fa-times fa-pencil"></i>
-                    <div class="tooltip">Sign Up</div>
-                </div>
-                    <div class="form">
-                        <h2>Create an account</h2>
-                        <form method="post" action="@Url.Action("Register", "Account")" id="frmRegister">
-                            <input type="text" name="f_Username" placeholder="Username">
-                            <input type="password" name="f_RawPassword" placeholder="Password" id="id_password">
-                            <input type="password" name="f_RawPasswordAgain" placeholder="Type Again" id="id_password">
-                            <input type="text" name="f_Name" placeholder="Full Name">
-                            <input type="text" name="f_Address" placeholder="Address">
-                            <input type="text" name="f_Email" placeholder="Email">
-                            <input type="text" name="f_DOB" class="datepicker" placeholder="Birthday">
-                            @{
-                                var exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
-                                exampleCaptcha.Reset();
-                            }
-                            @Html.Captcha(exampleCaptcha)
-                            <br />
-                            <input type="text" class="form-control" placeholder="Captcha" name="CaptchaCode">
-                            <input type="submit" value="Register">
-                        </form>
-                    </div>
-                </div>
+ <!-- login -->
+<div class="w3_login">
+    <h3>Sign Up</h3>
+    <div class="w3_login_module">
+        <div class="module form-module">
+            <div class="toggle" hidden>
+                <i class="fa fa-times fa-pencil"></i>
+                <div class="tooltip">Sign Up</div>
+            </div>
+            <div class="form">
+                <h2>Create an account</h2>
+                <form method="post" action="@Url.Action("Register", "Account")" id="frmRegister">
+                    <input type="text" name="f_Username" placeholder="Username">
+                    <input type="password" name="f_RawPassword" placeholder="Password" id="id_password">
+                    <input type="password" name="f_RawPasswordAgain" placeholder="Type Again" id="id_password">
+                    <input type="text" name="f_Name" placeholder="Full Name">
+                    <input type="text" name="f_Address" placeholder="Address">
+                    <input type="text" name="f_Email" placeholder="Email">
+                    <input type="text" name="f_DOB" class="datepicker" placeholder="Birthday">
+                    @{
+                        var exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+                        exampleCaptcha.Reset();
+                    }
+                    @Html.Captcha(exampleCaptcha)
+                    <br />
+                    <input type="text" class="form-control" placeholder="Captcha" name="CaptchaCode">
+                    <input type="submit" value="Register">
+                </form>
+            </div>
         </div>
     </div>
 </div>
 <!-- //login -->
+   
