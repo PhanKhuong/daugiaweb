@@ -21,7 +21,6 @@ namespace AuctionWeb.Controllers
         }
 
         // GET: Account/AskPermission
-        [HttpPost]
         public ActionResult AskPermission()
         {
             var WaitingUser = new UsersAsking()
@@ -34,9 +33,17 @@ namespace AuctionWeb.Controllers
             };
 
             using (var ctx = new AuctionSiteDBEntities())
-            {            
-                ctx.UsersAskings.Add(WaitingUser);
-                ctx.SaveChanges();
+            {
+                var userwaiting = ctx.UsersAskings.Any(u => u.IDUser == WaitingUser.IDUser);
+                if(userwaiting == true)
+                {
+                    ViewBag.exist = "You have already asked for selling permission for once!!!";
+                }
+                else
+                {
+                    ctx.UsersAskings.Add(WaitingUser);
+                    ctx.SaveChanges();
+                }            
             }
 
             return View();

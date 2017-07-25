@@ -102,7 +102,7 @@ namespace AuctionWeb.Controllers
         }
 
         // GET: MProduct/WatchedList
-        [CheckLogin(RequiredPermission = 1)]
+        [CheckLogin]
         public ActionResult WatchList()
         {
             using (var ctx = new AuctionSiteDBEntities())
@@ -136,7 +136,7 @@ namespace AuctionWeb.Controllers
 
         // POST: MProduct/WatchedList
         [HttpPost]
-        [CheckLogin(RequiredPermission = 1)]
+        [CheckLogin]
         public ActionResult WatchList(Product vm)
         {           
             using (var ctx = new AuctionSiteDBEntities())

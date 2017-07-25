@@ -76,7 +76,7 @@ else
             <div><a id="ref_watchlist" class="btn btn-success">Add To Favorite</a></div>
             <div class="w3agile_description">
                 <h4>Description :</h4>
-                <p>@Model.Description</p>
+                <p>@Html.Raw(HttpUtility.HtmlDecode(Model.Description))</p>
             </div>
             <div class="snipcart-item block">
                 <div class="snipcart-thumb agileinfo_single_right_snipcart">
@@ -114,97 +114,125 @@ else
                 <input value="@Model.UserID" name="UserID" hidden />
             </div>
         </form>
-        <!--checkuser-->
+        <!--checkuser-->      
         @if (CurrentContext.Islogged() == true)
+        {
+                double pos = CurrentContext.GetCurUser().positivePoint;
+                double nav = CurrentContext.GetCurUser().negativePoint;                
+                if (CurrentContext.GetCurUser().ID == Model.UserID)
                 {
-                    double pos = CurrentContext.GetCurUser().positivePoint;
-                    double nav = CurrentContext.GetCurUser().negativePoint;
-                    if (((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
-                    && CurrentContext.GetCurUser().ID != Model.lastuser && CurrentContext.GetCurUser().ID != Model.UserID)
-                    {
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 alert alert-info">
+                            <strong>Check information of your products frequently to see what was going on!!!</strong>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                }
+                else if (ViewBag.CheckBanned == true)
+                {
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 alert alert-info">
+                            <strong>You have no right anymore to race for this product!!</strong>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                }
+                else if (Model.lastuser == CurrentContext.GetCurUser().ID)
+                {
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 alert alert-info">
+                            <strong>You are the one who pay the highest price for it with @string.Format("{0:N0}", Model.PriceDisplay)!!</strong>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                }
+                else if (((Math.Abs(pos / (nav + pos)) < ((double)4 / (double)5)) || pos <= 0 ))
+                {
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 alert alert-info">
+                            <strong>You need to have at least 80% of positive rating in order to race for this product!!!</strong>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                }
+                else
+                {
                 <hr />
-                    <form class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction", new { Product = Model })">
+                <form class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction", new { Product = Model })">
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label">How much you could you pay for it?</label>
+                        <div class="col-sm-4">
+                            @{
+                                decimal? recommend = Model.PriceDisplay + Model.StepPrice;
+                            }
+                            <input type="text" class="form-control" placeholder="Recommend bid: @string.Format("{0:N0}", recommend)" name="Price">
+                        </div>
+                    </div>
+                    <div class="form-group" hidden>
+                        <div class="col-sm-4" hidden>
+
+                            <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
+                        </div>
+                    </div>
                         <div class="form-group">
-                            <label class="col-sm-8 control-label">How much you could you pay for it?</label>
-                            <div class="col-sm-4">
-                                @{
-                                    decimal? recommend = Model.PriceDisplay + Model.StepPrice;
-                                }
-                                <input type="text" class="form-control" placeholder="Recommend Price: @recommend" name="Price">
-                            </div>
-                        </div>
-                        <div class="form-group" hidden>
-                            <div class="col-sm-4" hidden>
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
+                                <!---->
+                                <div id="output"></div>
 
-                                <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
-                            </div>
-                        </div>
-                        @if (ViewBag.CheckBanned == true && CurrentContext.Islogged() == true)
-                        {
-                            <div class="alert alert-warning">
-                                <strong>You have no right anymore to race for this product!!!</strong>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
-                                    <!---->
-                                    <div id="output"></div>
+                                <div id="overlay" class="web_dialog_overlay"></div>
 
-                                    <div id="overlay" class="web_dialog_overlay"></div>
-
-                                    <div id="dialog" class="web_dialog">
-                                        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
-                                            <tr>
-                                                <td class="web_dialog_title">Confrimation</td>
-                                                <td class="web_dialog_title align_right">
-                                                    <a href="#" id="btnClose">Close</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="padding-left: 15px;">
-                                                    <b>Click yes to confirm again??</b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="text-align: center;">
-                                                    <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <!---->
+                                <div id="dialog" class="web_dialog">
+                                    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+                                        <tr>
+                                            <td class="web_dialog_title">Confrimation</td>
+                                            <td class="web_dialog_title align_right">
+                                                <a href="#" id="btnClose">Close</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 15px;">
+                                                <b>Click yes to confirm again??</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center;">
+                                                <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
+                                <!---->
                             </div>
-                        }
-                    </form>
-                                    }
-                                    else
-                                    {
-                                        <br />
-                                        <br />
-                                        <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <br />
-                                        <br />
-                                        <p style="color: blue">You need to have at least 80% of negative rating to bargain for this product!!!</p>
-                                    }
-    </div>
+                        </div>
+                </form>
+              }
+        }     
+        else
+        {
+            <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 alert alert-danger">
+                <strong>Please login to race for this product!!!</strong> 
+            </div>
+            <div class="col-sm-2"></div>
+            </div>
+        }     
+</div>
 }

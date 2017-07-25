@@ -2,4 +2,45 @@
     Ask For Selling Permission
 }
 
-<p>Da xin phep duoc ban trong 7 ngay!!! cho dong y</p>
+@if (ViewBag.exist != null)
+{
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-info">
+            <strong>@ViewBag.exist</strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-warning">
+            <strong>You will be directed to home in 5s....</strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-info">
+            <strong>You have ask for selling permission in 7 days!!! wait ultil your request be accepted!!! </strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-warning">
+            <strong>You will be directed to home in 5s....</strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+}
+
+@{
+    <script type="text/javascript">
+    window.setTimeout(function() {
+        window.location.href = '@Url.Action("Index", "Home")';
+    }, 5000);
+    </script>
+}

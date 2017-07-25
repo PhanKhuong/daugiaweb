@@ -21,11 +21,14 @@
 
 @if (ViewBag.ErrorMsg != null)
 {
-    <div class="alert alert-warning">
-        <strong>Warning!</strong> @ViewBag.ErrorMsg
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-danger">
+            <strong>@ViewBag.ErrorMsg</strong>
+        </div>
+        <div class="col-sm-2"></div>
     </div>
 }
-
 
     <!-- login -->
 <div class="w3_login">

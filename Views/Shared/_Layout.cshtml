@@ -40,13 +40,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <!-- header -->
     <div class="agileits_header">
-        <div class="w3l_offers">
-            <a href=@Url.Action("Index", "Home")>Winning is winning!!!</a>
+        <div class="w3l_search">
+            <form action="@Url.Action("SearchName","Products")" method="post">
+                <input type="text" name="Name" placeholder="Search By Name" />
+                <input type="submit" value="">
+            </form>
         </div>
         <div class="w3l_search">
-            <form action="#" method="post">
-                <input type="text" name="Product" placeholder="Search" />
-                <input type="submit" value=" ">
+            <form action="@Url.Action("SearchMix","Products")" method="post">
+                <div>
+                    <input maxlength="4" type="text" name="Name" placeholder="Search mix names and categories" />
+                </div>                
+                <div hidden><input type="text" name="IDCat" /></div>
+                <input type="submit" value=""/>
             </form>
         </div>
         <div class="product_list_header">

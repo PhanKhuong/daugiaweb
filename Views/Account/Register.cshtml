@@ -90,7 +90,7 @@
             <strong>Warning!</strong> @ViewBag.ErrorMsg
         </div>
         <div class="col-sm-2"></div>
-    </div>
+    </div>  
 }
 
 @if (ViewBag.suss != null)
@@ -102,6 +102,19 @@
         </div>
         <div class="col-sm-2"></div>
     </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-warning">
+            <strong>You will be directed to login page in 5s....</strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+        <!-- //redirect -->
+    <script type="text/javascript">
+    window.setTimeout(function() {
+        window.location.href = '@Url.Action("login", "Account")';
+    }, 5000);
+    </script>
 }
 
  <!-- login -->
@@ -136,5 +149,5 @@
         </div>
     </div>
 </div>
-<!-- //login -->
+
    

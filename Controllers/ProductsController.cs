@@ -98,9 +98,25 @@ namespace AuctionWeb.Controllers
             }
         }
         // GET: Products/Search
-        public ActionResult Search(int? id)
+        [HttpPost]
+        public ActionResult SearchName(ProductVM vm)
         {
-            return View();
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var listpro = ctx.Products.Where(p => p.Name.Contains(vm.Name) && p.Bought == false).ToList();
+                return View(listpro);
+            }                
+        }
+        // GET: Products/Search
+        [HttpPost]
+        public ActionResult SearchMix(ProductVM vm)
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var cat = ctx.Categories.Where(c => c.ID == vm.IDCat).FirstOrDefault();
+                var listpro = ctx.Products.Where(p => p.Name.Contains(vm.Name) && p.Bought == false && cat.Name.Contains(vm.Name)).ToList();
+                return View("SearchName", listpro);
+            }
         }
     }
 }

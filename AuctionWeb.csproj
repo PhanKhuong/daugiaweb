@@ -891,6 +891,7 @@
     <Content Include="Views\Emails\win.cshtml" />
     <Content Include="Views\Emails\owner.cshtml" />
     <Content Include="Views\Emails\notsell.cshtml" />
+    <Content Include="Views\Products\SearchName.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

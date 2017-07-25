@@ -63,14 +63,14 @@ namespace AuctionWeb.Controllers
                         ctx.Auctions.Add(ac);
                         ctx.SaveChanges();
                     }
-                    //check if we have many set price already
+                    //check if we have many sets of price already
                     else
                     {
                         var takeowner = ctx.Auctions.Where(t => t.own == true && t.IDPro == pro.ID).FirstOrDefault();
                         var ac = new Auction()
                         {
                             IDPro = pro.ID,
-                            IDUser = pro.UserID,
+                            IDUser = pro.lastuser,
                             Username = user.Username,
                             Fullname = user.Name,
                             Time = DateTime.Now,
@@ -179,10 +179,8 @@ namespace AuctionWeb.Controllers
                     Product pro = update.Products.Where(p => p.ID == idpro).FirstOrDefault<Product>();
                     pro.PriceDisplay = pro.StartPrice;
                     pro.lastuser = null;
-                    update.SaveChanges();
-                    return new EmailViewResult(emailkick);
-                    
-                }              
+                    update.SaveChanges();                   
+                }               
             }
             return RedirectToAction("SettedBid", "Auction", new { id = idpro }); // dong nay nam o trnag update.save
         }

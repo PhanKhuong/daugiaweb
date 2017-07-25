@@ -52,7 +52,7 @@ namespace AuctionWeb.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMsg = "Login failed! check your information...";
+                    ViewBag.ErrorMsg = "Login failed! check your information!!!";
                     return View();
                 }
             }
@@ -122,7 +122,7 @@ namespace AuctionWeb.Controllers
                     ctx.SaveChanges();
                 }              
             }
-            ViewBag.suss = "Cheers! sign up successfully. Please login to keep track your works...";
+            ViewBag.suss = "Cheers! sign up successfully. Please login to keep track your works!!!";
             return View();
         }
 
