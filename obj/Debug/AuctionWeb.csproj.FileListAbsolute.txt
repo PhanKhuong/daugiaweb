@@ -55,3 +55,4 @@ C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\Auc
 C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\bin\System.Web.Mvc.xml
 C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\obj\Debug\AuctionWeb.dll
 C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\obj\Debug\AuctionWeb.pdb
+C:\Users\14604\onedrive\tài liệu\visual studio 2017\Projects\AuctionWeb\AuctionWeb\obj\Debug\AuctionWeb.csprojResolveAssemblyReference.cache

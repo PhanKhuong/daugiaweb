@@ -30,12 +30,13 @@ namespace AuctionWeb.Controllers
                     {
                         dynamic emailforwinner = new Email("win");
                         dynamic emailforonwer = new Email("owner");
+                        dynamic emailforonwer_notsell = new Email("notsell");
                         pro.Bought = true;
-                        if(pro.lastuser != null)
-                        {
-                            var user = ctx.Users.Where(u => u.ID == pro.lastuser).FirstOrDefault();
-                            var userowner = ctx.Users.Where(u => u.ID == pro.UserID).FirstOrDefault();
-                            //create an email       
+                        var user = ctx.Users.Where(u => u.ID == pro.lastuser).FirstOrDefault();
+                        var userowner = ctx.Users.Where(u => u.ID == pro.UserID).FirstOrDefault();
+                        if (pro.lastuser != null)
+                        {                         
+                            //create emails       
                             //for winnner
                             emailforwinner.To = user.Email;
                             emailforwinner.Name = user.Name;
@@ -49,6 +50,12 @@ namespace AuctionWeb.Controllers
                             emailforonwer.price = pro.PriceDisplay;
                             emailforwinner.Send();
                         }
+                        //if no one pay attention for products lastuser == null
+                        //for onwer
+                        emailforonwer_notsell.To = userowner.Email;
+                        emailforonwer_notsell.Name = userowner.Name;
+                        emailforonwer_notsell.ProName = pro.Name;
+                        emailforonwer_notsell.Send();
                     }
                 }
                 ctx.SaveChanges();

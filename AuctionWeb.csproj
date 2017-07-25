@@ -890,6 +890,7 @@
     <Content Include="Views\Emails\Kick.cshtml" />
     <Content Include="Views\Emails\win.cshtml" />
     <Content Include="Views\Emails\owner.cshtml" />
+    <Content Include="Views\Emails\notsell.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
