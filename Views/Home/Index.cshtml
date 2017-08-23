@@ -1,3 +1,161 @@
-﻿@section view_title {
+﻿@using AuctionWeb.Models;
+
+@model HomeVM
+
+@section view_title {
     Home
 }
+
+@section css{
+    <link href="~/Assets/bootstrap-3.3.7/css/slider.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <!--top setting price-->
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <h3>
+                    Top 5 Producs With The Most Number Of Bargain
+                </h3>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        @foreach (var p in Model.MostSettingPrice)
+                        {
+                                <div class="col-sm-3">
+                                    <div class="col-item">
+                                        <div class="photo">
+                                            <img src="~/Img/products/@p.ID/main.jpg" class="img-responsive" alt="a" />
+                                        </div>
+                                        <div class="info">
+                                            <div class="row">
+                                                <div class="price col-md-12">
+                                                    <h5>
+                                                        @p.Name
+                                                    </h5>
+                                                    <h5 class="price-text-color">
+                                                        Current Price: @p.PriceDisplay
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <div class="separator clear-left">
+                                                <p class="btn-details">
+                                                    <i class="fa fa-list"></i><a href="@Url.Action("Details","Products", new { id = @p.ID })" class="hidden-sm">More details</a>
+                                                </p>
+                                            </div>
+                                            <div class="clearfix">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--top max price-->
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <h3>
+                    Top 5 Expensive Products Available
+                </h3>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        @foreach (var p in Model.MaxPrice)
+                        {
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Img/products/@p.ID/main.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-12">
+                                                <h5>
+                                                    @p.Name
+                                                </h5>
+                                                <h5 class="price-text-color">
+                                                    Current Price: @p.PriceDisplay
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="separator clear-left">
+                                            <p class="btn-details">
+                                                <i class="fa fa-list"></i><a href="@Url.Action("Details","Products", new { id = @p.ID })" class="hidden-sm">More details</a>
+                                            </p>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--top Run out of time-->
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <h3>
+                    Top 5 Run Out Of Time Products
+                </h3>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        @foreach (var p in Model.MaxPrice)
+                        {
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Img/products/@p.ID/main.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-12">
+                                                <h5>
+                                                    @p.Name
+                                                </h5>
+                                                <h5 class="price-text-color">
+                                                    Current Price: @p.PriceDisplay
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="separator clear-left">
+                                            End: @p.TimePost.AddDays(p.IntervalTime)
+                                        </div>
+                                        <div class="separator clear-left">
+                                            <p class="btn-details">
+                                                <i class="fa fa-list"></i><a href="@Url.Action("Details","Products", new { id = @p.ID })" class="hidden-sm">More details</a>
+                                            </p>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

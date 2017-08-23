@@ -199,6 +199,7 @@
     <Content Include="Assets\bootstrap-3.3.7\css\bootstrap-theme.min.css" />
     <Content Include="Assets\bootstrap-3.3.7\css\bootstrap.css" />
     <Content Include="Assets\bootstrap-3.3.7\css\bootstrap.min.css" />
+    <Content Include="Assets\bootstrap-3.3.7\css\slider.css" />
     <Content Include="Assets\bootstrap-3.3.7\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\bootstrap-3.3.7\css\jquery.dataTables.min.css" />
     <Content Include="Assets\bootstrap-3.3.7\js\bootstrap.js" />
@@ -812,6 +813,7 @@
     <Compile Include="Models\HistoryPrice.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>

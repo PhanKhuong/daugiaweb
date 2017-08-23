@@ -188,7 +188,7 @@ namespace AuctionWeb.Controllers
                 bool check = ctx.Ratings.Any(r => r.IDUser == vm.ID && r.IDUserRating == idcurrent);
                 if(check == true)
                 {
-                    TempData["mess"] = "You Have already rate for this seller!!!";
+                    TempData["mess"] = "You Have already rated for this seller!!!";
                     return RedirectToAction("ShowWin", "Auction");
                 }
                 int id = vm.ID;

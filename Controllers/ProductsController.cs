@@ -19,30 +19,30 @@ namespace AuctionWeb.Controllers
                 return RedirectToAction("Index", "Home");
             }
             using (var ctx = new AuctionSiteDBEntities())
-             {
+            {
                 //check expired
                 var listpros = ctx.Products.Where(p => (DateTime.Now > System.Data.Entity.DbFunctions.AddDays(p.TimePost, p.IntervalTime)))
                     .ToList();
-                if(listpros.Count > 0)
+                if (listpros.Count > 0)
                 {
                     foreach (Product pro in listpros)
                     {
                         pro.Bought = true;
                     }
-                }              
+                }
                 ctx.SaveChanges();
-                bool list = ctx.Products.Any(p => p.Bought == false);
-                var listpro = ctx.Products.Where(p => p.Bought == false).ToList();
+                bool list = ctx.Products.Any(p => p.Bought == false && p.IDCat == id);
+                var listpro = ctx.Products.Where(p => p.Bought == false && p.IDCat == id).ToList();
                 //check if no product is found because all of them have been deleted at check expired
-                if(list == true)
+                if (list == true)
                 {
                     return View(listpro);
                 }
                 else
                 {
-                    return View(model:null);
-                }   
-                
+                    return View(model: null);
+                }
+
             }
         }
 
@@ -66,7 +66,7 @@ namespace AuctionWeb.Controllers
                     var checkbanned = ctx.BannedUsers.Any(p => p.IDProduct == id && p.IDUser == iduser);
                     ViewBag.CheckBanned = checkbanned;
                 }
-                    return View(model);
+                return View(model);
             }
         }
     }

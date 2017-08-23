@@ -28,7 +28,7 @@ else
                                         <div class="snipcart-thumb">
                                             <a href="@Url.Action("Details","Products", new { id = @p.ID })"><img src="~/Img/products/@p.ID/main.jpg" alt=" " class="img-responsive" /></a>
                                             <p>@p.Name</p>
-                                            <h4>Price now: @p.PriceDisplay</h4>
+                                            <h4>Price now: @string.Format("{0:N0}", p.PriceDisplay)</h4>
                                         </div>
                                         <div class="snipcart-details">
                                             <form action="#" method="post">

@@ -10,8 +10,6 @@
     });
 
     $("#btnSubmit").click(function (e) {
-        var brand = $("#brands input:radio:checked").val();
-        $("#output").html("<b>Your favorite mobile brand: </b>" + brand);
         HideDialog();
         e.preventDefault();
     });

@@ -80,10 +80,10 @@ else
             </div>
             <div class="snipcart-item block">
                 <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                    <h4>Start Price: @Model.StartPrice</h4>
-                    <h4>Current Price: @Model.PriceDisplay</h4>
-                    <h4>Buy now with: @Model.EndPrice</h4>
-                    <h4>Step Price: @Model.StepPrice</h4>
+                    <h4>Start Price: @string.Format("{0:N0}", Model.StartPrice)</h4>
+                    <h4>Current Price: @string.Format("{0:N0}", Model.PriceDisplay)</h4>
+                    <h4>Buy now with: @string.Format("{0:N0}", Model.EndPrice)</h4>
+                    <h4>Step Price: @string.Format("{0:N0}", Model.StepPrice)</h4>
                     <h4>Time End: @Model.TimePost.AddDays(Model.IntervalTime)</h4>
                 </div>
                 <div class="snipcart-details agileinfo_single_right_details">
