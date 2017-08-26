@@ -102,6 +102,7 @@
           <ScalarProperty Name="DOB" ColumnName="DOB" />
           <ScalarProperty Name="negativePoint" ColumnName="negativePoint" />
           <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
+          <ScalarProperty Name="AskingDate" ColumnName="AskingDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -3,6 +3,7 @@ using AuctionWeb.Helpers;
 using AuctionWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
@@ -93,6 +94,43 @@ namespace AuctionWeb.Controllers
                 usertoUpdate.Password = StringUtils.Md5(vm.Email);
                 ctx.SaveChanges();
                 return RedirectToAction("Index", "Home");
+            }
+        }
+
+        // Post: Accept
+        public ActionResult Accept(User vm)
+        {
+            UsersAsking useras;
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                useras = ctx.UsersAskings.Where(s => s.IDUser == vm.ID).FirstOrDefault<UsersAsking>();
+                var list = ctx.Users.ToList();
+                User usertoUpdate = list.Where(u => u.ID == vm.ID).FirstOrDefault<User>();
+                usertoUpdate.Permission = 1;
+                usertoUpdate.AskingDate = DateTime.Now;
+                ctx.SaveChanges();            
+            }
+
+            //Create new context for disconnected scenario
+            using (var newContext = new AuctionSiteDBEntities())
+            {
+                newContext.Entry(useras).State = System.Data.Entity.EntityState.Deleted;
+
+                newContext.SaveChanges();
+            }
+            return RedirectToAction("WaitingUsers", "MAccount");
+        }
+
+        // Get: Accept
+        public ActionResult Deny(User vm)
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var user = new UsersAsking { ID = vm.ID };
+                ctx.UsersAskings.Attach(user);
+                ctx.UsersAskings.Remove(user);
+                ctx.SaveChanges();
+                return RedirectToAction("WaitingUsers", "MAccount");
             }
         }
     }

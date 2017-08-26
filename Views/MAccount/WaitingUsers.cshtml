@@ -11,6 +11,9 @@
         $(document).ready(function () {
             $('#usersasking').DataTable();
         });
+        $('.btn_reset').on('click', function () {
+            $('#submit_resetuser').submit();
+        });
     </script>
     <script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
     <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
@@ -27,6 +30,8 @@
             <th>Username</th>
             <th>Email</th>
             <th>AskingDate</th>
+            <th>Accept</th>
+            <th>Deny</th>
         </tr>
     </thead>
     <tfoot>
@@ -35,6 +40,8 @@
             <th>Username</th>
             <th>Email</th>
             <th>AskingDate</th>
+            <th>Accept</th>
+            <th>Deny</th>
         </tr>
     </tfoot>
     <tbody>
@@ -44,7 +51,27 @@
                 <td>@p.Name</td>
                 <td>@p.Username</td>
                 <td>@p.Email</td>
-                <th>@p.AskingDate</th>
+                <td>@p.AskingDate</td>
+                <td>
+                    <a href="javascript:;" class=" btn btn-success btn_reset" role="button">
+                        Accept request
+                    </a>
+                    <form id="submit_resetuser" method="post" action="@Url.Action("Accept","MAccount")">
+                        <div class="form-group">
+                            <input value="@p.IDUser" name="ID" hidden />
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <a href="javascript:;" class=" btn btn-success btn_reset" role="button">
+                        Delete Request
+                    </a>
+                    <form id="submit_resetuser" method="post" action="@Url.Action("Deny","MAccount")">
+                        <div class="form-group">
+                            <input value="@p.ID" name="ID" hidden />
+                        </div>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

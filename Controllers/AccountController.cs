@@ -38,6 +38,16 @@ namespace AuctionWeb.Controllers
                         Response.Cookies["userId"].Expires = DateTime.Now.AddDays(7);
                     }
 
+                    if(user.AskingDate != null)
+                    {
+                        if (user.AskingDate.Value.AddDays(7) < DateTime.Now)
+                        {
+                            var list = ctx.Users.ToList();
+                            User usertoUpdate = list.Where(u => u.ID == user.ID).FirstOrDefault<User>();
+                            usertoUpdate.Permission = 0;
+                            ctx.SaveChanges();
+                        }
+                    }                   
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -78,6 +88,7 @@ namespace AuctionWeb.Controllers
 
                 User u = new User
                 {
+                    AskingDate = null,
                     positivePoint = 0,
                     negativePoint = 0,
                     Username = model.f_Username,

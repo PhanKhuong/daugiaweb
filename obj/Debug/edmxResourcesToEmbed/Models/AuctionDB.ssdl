@@ -97,9 +97,10 @@
     <Property Name="Password" Type="varchar" MaxLength="100" />
     <Property Name="Permission" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="DOB" Type="datetime" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
     <Property Name="negativePoint" Type="float" Nullable="false" />
     <Property Name="positivePoint" Type="float" Nullable="false" />
+    <Property Name="AskingDate" Type="datetime" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>

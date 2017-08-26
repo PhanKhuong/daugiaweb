@@ -719,6 +719,7 @@
     <Content Include="Views\MAccount\Delete.cshtml" />
     <Content Include="Views\MCategories\Index.cshtml" />
     <Content Include="Views\Auction\Index.cshtml" />
+    <Content Include="Views\MAccount\Accept.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

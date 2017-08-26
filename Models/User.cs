@@ -21,8 +21,9 @@ namespace AuctionWeb.Models
         public string Password { get; set; }
         public Nullable<int> Permission { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
+        public System.DateTime DOB { get; set; }
         public double negativePoint { get; set; }
         public double positivePoint { get; set; }
+        public Nullable<System.DateTime> AskingDate { get; set; }
     }
 }

@@ -97,9 +97,10 @@
     <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Permission" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="negativePoint" Type="Double" Nullable="false" />
     <Property Name="positivePoint" Type="Double" Nullable="false" />
+    <Property Name="AskingDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>
