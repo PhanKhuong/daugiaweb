@@ -90,6 +90,7 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Bought" Type="bit" />
           <Property Name="PriceDisplay" Type="money" />
+          <Property Name="lastuser" Type="int" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -114,6 +115,7 @@
           <Property Name="negativePoint" Type="float" Nullable="false" />
           <Property Name="positivePoint" Type="float" Nullable="false" />
           <Property Name="AskingDate" Type="datetime" />
+          <Property Name="IsBargain" Type="bit" />
         </EntityType>
         <EntityType Name="UsersAsking">
           <Key>
@@ -229,6 +231,7 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Bought" Type="Boolean" />
           <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="lastuser" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -253,6 +256,7 @@
           <Property Name="negativePoint" Type="Double" Nullable="false" />
           <Property Name="positivePoint" Type="Double" Nullable="false" />
           <Property Name="AskingDate" Type="DateTime" Precision="3" />
+          <Property Name="IsBargain" Type="Boolean" />
         </EntityType>
         <EntityType Name="UsersAsking">
           <Key>
@@ -370,6 +374,7 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Bought" ColumnName="Bought" />
                 <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
+                <ScalarProperty Name="lastuser" ColumnName="lastuser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -395,6 +400,7 @@
                 <ScalarProperty Name="negativePoint" ColumnName="negativePoint" />
                 <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
                 <ScalarProperty Name="AskingDate" ColumnName="AskingDate" />
+                <ScalarProperty Name="IsBargain" ColumnName="IsBargain" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

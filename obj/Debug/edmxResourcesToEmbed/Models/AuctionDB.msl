@@ -87,6 +87,7 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Bought" ColumnName="Bought" />
           <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
+          <ScalarProperty Name="lastuser" ColumnName="lastuser" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -112,6 +113,7 @@
           <ScalarProperty Name="negativePoint" ColumnName="negativePoint" />
           <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
           <ScalarProperty Name="AskingDate" ColumnName="AskingDate" />
+          <ScalarProperty Name="IsBargain" ColumnName="IsBargain" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

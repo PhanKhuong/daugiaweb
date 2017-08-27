@@ -30,5 +30,6 @@ namespace AuctionWeb.Models
         public int UserID { get; set; }
         public Nullable<bool> Bought { get; set; }
         public Nullable<decimal> PriceDisplay { get; set; }
+        public Nullable<int> lastuser { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace AuctionWeb.Controllers
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
+                vm.lastuser = null;
                 vm.PriceDisplay = vm.StartPrice;
                 vm.IntervalTime = vm.IntervalTime;
                 vm.CurrentPrice = 0;

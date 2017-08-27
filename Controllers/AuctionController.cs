@@ -17,54 +17,63 @@ namespace AuctionWeb.Controllers
         {
             using (var ctx = new AuctionSiteDBEntities())
             {
-                var list_auction = ctx.Auctions.ToList();
                 var list_product = ctx.Products.ToList();
+                var list_auction = ctx.Auctions.ToList();
                 var user = CurrentContext.GetCurUser();
-                var pro = ctx.Products.Where(p => p.ID == vm.ID).FirstOrDefault();         
-                var takenew = ctx.Auctions.Where(t => t.own == true).FirstOrDefault();
-                if (list_auction.Count == 0)
+                var pro = ctx.Products.Where(p => p.ID == vm.ID).FirstOrDefault<Product>();
+                //check if user just set a price for a product
+                if(pro.lastuser != CurrentContext.GetCurUser().ID
+                   && (vm.Price >= pro.PriceDisplay + pro.StepPrice))
                 {
-                    takenew.MaxPrice = 0;
-                }
-                if ((vm.Price >= (pro.PriceDisplay + pro.StepPrice)) && (vm.Price < (takenew.MaxPrice - pro.StepPrice)))
-                {
-                    //product
-                    var product = list_product.Where(p => p.ID == pro.ID).FirstOrDefault<Product>();
-                    product.PriceDisplay = vm.Price + pro.StepPrice;                    
-                    //create a new one
-                    var ac = new Auction()
+                    //check if each product has been setted a price once time
+                    if ((list_auction.Any(l => l.IDPro == pro.ID) == false))
                     {
-                        IDPro = pro.ID,
-                        IDUser = pro.UserID,
-                        Username = user.Username,
-                        Fullname = user.Name,
-                        Time = DateTime.Now,
-                        MaxPrice = vm.Price,
-                        own = false,
-                    };
-                    ctx.Auctions.Add(ac);
-                    ctx.SaveChanges();
-                }
-                else if((vm.Price >= (pro.PriceDisplay + pro.StepPrice)))
-                {
-                    pro.PriceDisplay += pro.StepPrice;
-                    pro.CurrentPrice = vm.Price;
-
-                    var ac = new Auction()
+                        var ac = new Auction()
+                        {
+                            IDPro = pro.ID,
+                            IDUser = pro.UserID,
+                            Username = user.Username,
+                            Fullname = user.Name,
+                            Time = DateTime.Now,
+                            MaxPrice = vm.Price,
+                            own = true,
+                        };
+                        pro.lastuser = user.ID;
+                        pro.PriceDisplay = ac.MaxPrice;
+                        ctx.Auctions.Add(ac);
+                        ctx.SaveChanges();
+                        ViewBag.info = "successfully!!!";
+                    }
+                    else
                     {
-                        IDPro = pro.ID,
-                        IDUser = pro.UserID,
-                        Username = user.Username,
-                        Fullname = user.Name,
-                        Time = DateTime.Now,
-                        MaxPrice = vm.Price,
-                        own = true,
-                    };
-                    ctx.Auctions.Add(ac);
-                    ctx.SaveChanges();
+                        var takeowner = ctx.Auctions.Where(t => t.own == true && t.IDPro == pro.ID).FirstOrDefault();
+                        var ac = new Auction()
+                        {
+                            IDPro = pro.ID,
+                            IDUser = pro.UserID,
+                            Username = user.Username,
+                            Fullname = user.Name,
+                            Time = DateTime.Now,
+                            MaxPrice = vm.Price,
+                        };
+                        if (takeowner.MaxPrice < ac.MaxPrice)
+                        {
+                            ac.own = true;
+                        }
+                        pro.lastuser = user.ID;
+                        pro.PriceDisplay = ac.MaxPrice;
+                        takeowner.own = false;
+                        ctx.Auctions.Add(ac);
+                        ctx.SaveChanges();
+                        ViewBag.info = "successfully!!!";
+                    }
                 }
+                else
+                {
+                    ViewBag.info = "You just nailled a price for it";
+                }               
             }
-            return View();
+            return RedirectToAction("Details", "Products", new {id = vm.ID});
         }
     }
 }

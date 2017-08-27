@@ -85,13 +85,13 @@ namespace AuctionWeb.Controllers
                 if(list.Any(u => u.Email == model.f_Email))
                 {
                     ViewBag.ErrorMsg = "this email has been already used ";
-                   
+                    return View();
                 }
                 if( list.Any(u => u.Username == model.f_Username))
                 {
                     ViewBag.ErrorMsg = "this username has been already used ";
-                }
-                return View();
+                    return View();
+                }               
             }
 
                 if (!ModelState.IsValid)
@@ -103,6 +103,7 @@ namespace AuctionWeb.Controllers
 
                 User u = new User
                 {
+                    IsBargain = false,
                     AskingDate = null,
                     positivePoint = 0,
                     negativePoint = 0,

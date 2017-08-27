@@ -85,6 +85,7 @@
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="Bought" Type="bit" />
     <Property Name="PriceDisplay" Type="money" />
+    <Property Name="lastuser" Type="int" />
   </EntityType>
   <EntityType Name="ProductsInCharge">
     <Key>
@@ -109,6 +110,7 @@
     <Property Name="negativePoint" Type="float" Nullable="false" />
     <Property Name="positivePoint" Type="float" Nullable="false" />
     <Property Name="AskingDate" Type="datetime" />
+    <Property Name="IsBargain" Type="bit" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>

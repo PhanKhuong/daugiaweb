@@ -85,6 +85,7 @@
     <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="Bought" Type="Boolean" />
     <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="lastuser" Type="Int32" />
   </EntityType>
   <EntityType Name="ProductsInCharge">
     <Key>
@@ -109,6 +110,7 @@
     <Property Name="negativePoint" Type="Double" Nullable="false" />
     <Property Name="positivePoint" Type="Double" Nullable="false" />
     <Property Name="AskingDate" Type="DateTime" Precision="3" />
+    <Property Name="IsBargain" Type="Boolean" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>
