@@ -35,7 +35,7 @@ namespace AuctionWeb.Controllers
 
                 ctx.Categories.Add(cat);
                 ctx.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "MCategories");
             }
         }
 

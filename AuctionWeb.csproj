@@ -840,7 +840,7 @@
     <Compile Include="Models\Won.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Views\BargainVM.cs" />
+    <Compile Include="Models\BargainVM.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\ProductVM.cs" />
     <Compile Include="Models\RatingVM.cs" />
@@ -893,6 +893,8 @@
     <Content Include="Views\Emails\notsell.cshtml" />
     <Content Include="Views\Products\SearchName.cshtml" />
     <Content Include="Views\Emails\setprice.cshtml" />
+    <Content Include="Views\Emails\resetpassword.cshtml" />
+    <Content Include="Views\MProduct\InTimeadmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

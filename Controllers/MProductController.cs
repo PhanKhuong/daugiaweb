@@ -32,7 +32,7 @@ namespace AuctionWeb.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         [CheckLogin(RequiredPermission = 1)]
         public ActionResult Add(Product vm, HttpPostedFileBase Firstimg, HttpPostedFileBase Secondimg
@@ -51,7 +51,7 @@ namespace AuctionWeb.Controllers
                 ctx.Products.Add(vm);
                 ctx.SaveChanges();
 
-                if(Firstimg != null && Firstimg.ContentLength > 0 && (Secondimg != null && Secondimg.ContentLength > 0) &&
+                if (Firstimg != null && Firstimg.ContentLength > 0 && (Secondimg != null && Secondimg.ContentLength > 0) &&
                     (Thirdimg != null && Thirdimg.ContentLength > 0))
                 {
                     string spDirPath = Server.MapPath("~/Img/products");
@@ -84,7 +84,7 @@ namespace AuctionWeb.Controllers
                 ds.EditDes.Add(EditDes);
                 ds.SaveChanges();
             }
-                return View();
+            return View();
         }
 
         // GET: MProduct/InTime
@@ -94,11 +94,11 @@ namespace AuctionWeb.Controllers
             using (var ctx = new AuctionSiteDBEntities())
             {
                 int Iduser = CurrentContext.GetCurUser().ID;
-                var list = ctx.Products.Where(p => ((p.UserID == Iduser) 
-                && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost,  p.IntervalTime))))
+                var list = ctx.Products.Where(p => ((p.UserID == Iduser)
+                && (DateTime.Now <= EntityFunctions.AddDays(p.TimePost, p.IntervalTime))))
                 .ToList();
                 return View(list);
-            }          
+            }
         }
 
         // GET: MProduct/WatchedList
@@ -138,7 +138,7 @@ namespace AuctionWeb.Controllers
         [HttpPost]
         [CheckLogin]
         public ActionResult WatchList(Product vm)
-        {           
+        {
             using (var ctx = new AuctionSiteDBEntities())
             {
                 var iduser = CurrentContext.GetCurUser().ID;
@@ -146,13 +146,13 @@ namespace AuctionWeb.Controllers
                 {
                     IDProducts = vm.ID,
                     IDUsers = iduser,
-                    
+
                 };
 
                 ctx.FavoriteProducts.Add(fr);
                 ctx.SaveChanges();
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: MProduct/WatchedList
@@ -179,7 +179,7 @@ namespace AuctionWeb.Controllers
             {
                 var pro = ctx.Products.Where(p => p.ID == vm.ID).FirstOrDefault<Product>();
                 pro.Description = HttpUtility.HtmlDecode(vm.Description);
-                ctx.SaveChanges();               
+                ctx.SaveChanges();
             }
             using (var dt = new AuctionSiteDBEntities())
             {
@@ -189,5 +189,27 @@ namespace AuctionWeb.Controllers
                 return RedirectToAction("InTime", "MProduct");
             }
         }
+        // POST: MProduct/WatchedList
+        [CheckLogin(RequiredPermission = 1)]
+        public ActionResult InTimeadmin()
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var listcat = ctx.Categories.ToList();
+                ViewBag.Categories = listcat;
+                return View();
+            }
+        }
+        // POST: MProduct/WatchedList
+        [CheckLogin(RequiredPermission = 1)]
+        public ActionResult ListProAdmin()
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var listcat = ctx.Categories.ToList();
+                ViewBag.Categories = listcat;
+                return View();
+            }
+        }     
     }
 }

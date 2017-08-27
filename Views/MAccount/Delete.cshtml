@@ -26,59 +26,73 @@
     <link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
 }
 
-@{ 
-    int id_tem;
+@if (Model == null)
+{
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 alert alert-warning">
+            <strong>No users available!!!</strong>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
 }
-<table id="watchlisttable" class="display" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Option</th>
-            <th>Reset Password</th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>Username</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Option</th>
-            <th>Reset Password</th>
-        </tr>
-    </tfoot>
-    <tbody>
-        @foreach (var p in Model)
-        {
+else
+{
+    <table id="watchlisttable" class="display" cellspacing="0" width="100%">
+        <thead>
             <tr>
-                <td>@p.Username</td>
-                <td>@p.Name</td>
-                <td>@p.Email</td>
-                <td>
-                    <a href="javascript:;" class=" btn btn-success btn_delusers" role="button">
-                        Delete
-                    </a>
-                    <form id="submit_deluser" method="post" action="@Url.Action("Delete","MAccount")">
-                        <div class="form-group">
-                            <input value="@p.ID" name="ID" hidden />
-                        </div>
-                    </form>
-                </td>
-                <td>
-                    <a href="javascript:;" class=" btn btn-success btn_reset" role="button">
-                        Reset Password
-                    </a>
-                    <form id="submit_resetuser" method="post" action="@Url.Action("Reset","MAccount")">
-                        <div class="form-group">
-                            <input value="@p.ID" name="ID" hidden />
-                        </div>
-                        <div class="form-group">
-                            <input value="@p.Email" name="Email" hidden />
-                        </div>
-                    </form>
-                </td>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Option</th>
+                <th>Reset Password</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Option</th>
+                <th>Reset Password</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Username</td>
+                    <td>@p.Name</td>
+                    <td>@p.Email</td>
+                    <td>
+                        <a href="javascript:;" class=" btn btn-success btn_delusers" role="button">
+                            Delete
+                        </a>
+                        <form id="submit_deluser" method="post" action="@Url.Action("Delete","MAccount")">
+                            <div class="form-group">
+                                <input value="@p.ID" name="ID" hidden />
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="javascript:;" class=" btn btn-success btn_reset" role="button">
+                            Reset Password
+                        </a>
+                        <form id="submit_resetuser" method="post" action="@Url.Action("Reset","MAccount")">
+                            <div class="form-group">
+                                <input value="@p.ID" name="ID" hidden />
+                            </div>
+                            <div class="form-group">
+                                <input value="@p.Email" name="Email" hidden />
+                            </div>
+                            <div class="form-group">
+                                <input value="@p.Name" name="Name" hidden />
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

@@ -130,12 +130,15 @@ namespace AuctionWeb.Controllers
         [CheckLogin]
         public ActionResult Profile()
         {
-            if (CurrentContext.Islogged() == false)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
+            User user = CurrentContext.GetCurUser();
+            double total_percents = Math.Abs(user.positivePoint / (user.positivePoint + user.negativePoint)) * 100;
+            ViewBag.Point = total_percents;
+                using (var ctx = new AuctionSiteDBEntities())
+                {
+                    var iduser = CurrentContext.GetCurUser().ID;
+                    var list_rating = ctx.Ratings.Where(p => p.IDUser == iduser).ToList();
+                    return View();
+                }                    
         }
 
         //Change info

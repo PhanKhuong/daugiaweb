@@ -1,6 +1,7 @@
 ﻿using AuctionWeb.Filters;
 using AuctionWeb.Helpers;
 using AuctionWeb.Models;
+using Postal;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -86,7 +87,7 @@ namespace AuctionWeb.Controllers
                 ctx.Users.Remove(user);
                 ctx.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return View();
             }
         }
 
@@ -100,7 +101,12 @@ namespace AuctionWeb.Controllers
                 User usertoUpdate = list.Where(u => u.ID == vm.ID).FirstOrDefault<User>();
                 usertoUpdate.Password = StringUtils.Md5(vm.Email);
                 ctx.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                //create an email     
+                dynamic resetpassword = new Email("resetpassword");
+                resetpassword.To = vm.Email;
+                resetpassword.Name = vm.Name;
+                resetpassword.Send();
+                return RedirectToAction("Delete", "MAccount");
             }
         }
 

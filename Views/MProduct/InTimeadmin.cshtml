@@ -1,0 +1,34 @@
+﻿@using AuctionWeb.Models
+
+@model List<Category>
+
+@section view_title{
+    Products Categorization
+}
+
+@section js {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#watchlisttable').DataTable();
+        });
+        $('.edituser').on('click', function () {
+            $('.submit_edituser').submit();
+        });
+        $('.btn_edituser').on('click', function () {
+            $('.submit_deluser').submit();
+        });
+        $("#btn_adduser").click(function (e) {
+            $("#adduser").show();
+
+            e.preventDefault();
+        });
+    </script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
+    <script src="~/Assets/popup/popup.js"></script>
+}
+
+@section css {
+    <link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+    <link href="~/Assets/popup/popup.css" rel="stylesheet" />
+}
