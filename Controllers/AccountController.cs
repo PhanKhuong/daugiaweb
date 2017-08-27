@@ -79,7 +79,22 @@ namespace AuctionWeb.Controllers
         [CaptchaValidation("CaptchaCode", "ExampleCaptcha", "Incorrect CAPTCHA code!")]
         public ActionResult Register(RegisterVM model)
         {
-            if (!ModelState.IsValid)
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var list = ctx.Users.ToList();
+                if(list.Any(u => u.Email == model.f_Email))
+                {
+                    ViewBag.ErrorMsg = "this email has been already used ";
+                   
+                }
+                if( list.Any(u => u.Username == model.f_Username))
+                {
+                    ViewBag.ErrorMsg = "this username has been already used ";
+                }
+                return View();
+            }
+
+                if (!ModelState.IsValid)
             {
                 ViewBag.ErrorMsg = "Incorrect CAPTCHA code!";
             }
@@ -119,6 +134,97 @@ namespace AuctionWeb.Controllers
             }
 
             return View();
+        }
+
+        //Change info
+        [CheckLogin]
+        public ActionResult ChangeInfo()
+        {
+            int id = CurrentContext.GetCurUser().ID;
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var user = ctx.Users.Where(u => u.ID == id).FirstOrDefault();
+                return View(user);
+            }              
+        }
+
+        //Change info
+        [CheckLogin]
+        [HttpPost]
+        public ActionResult ChangeInfo(User vm)
+        {            
+            using (var dt = new AuctionSiteDBEntities())
+            {
+                string encPwd = StringUtils.Md5(vm.Password);
+                var list = dt.Users.ToList();
+                var user = dt.Users.Where(u => u.Password == encPwd && vm.ID == u.ID).FirstOrDefault();
+                if(user == null)
+                {
+                    ViewBag.ErrorMsg = "wrong password!!!";
+                    return View(CurrentContext.GetCurUser());
+                }
+                if (list.Any(u => u.Email == vm.Email && u.ID != vm.ID))
+                {
+                    ViewBag.ErrorMsg = "this email has been already used ";
+                    return View(CurrentContext.GetCurUser());
+                }
+                
+            }
+
+            int id = CurrentContext.GetCurUser().ID;
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var user = ctx.Users.Where(u => u.ID == vm.ID).FirstOrDefault<User>();
+                user.Email = vm.Email;
+                user.Name = vm.Name;
+                ctx.SaveChanges();
+                ViewBag.ErrorMsg = "Change info success!!!";
+                return View(CurrentContext.GetCurUser());
+            }
+        }
+
+        //Change Password
+        [CheckLogin]
+        public ActionResult ChangePassword()
+        {
+            int id = CurrentContext.GetCurUser().ID;
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var user = ctx.Users.Where(u => u.ID == id).FirstOrDefault();
+                return View(user);
+            }
+        }
+
+        //Change Pass
+        [CheckLogin]
+        [HttpPost]
+        public ActionResult ChangePassword(User vm)
+        {
+            using (var dt = new AuctionSiteDBEntities())
+            {
+                string encPwd = StringUtils.Md5(vm.Password);
+                var list = dt.Users.ToList();
+                var user = dt.Users.Where(u => u.Password == encPwd && vm.ID == u.ID).FirstOrDefault();
+                if (user == null)
+                {
+                    ViewBag.ErrorMsg = "Current password is wrong!!!";
+                    return View(CurrentContext.GetCurUser());
+                }
+                if (vm.NewPassword != vm.NewPasswordAgain)
+                {
+                    ViewBag.ErrorMsg = "Check your new password!!!";
+                    return View(CurrentContext.GetCurUser());
+                } 
+            }
+
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var user = ctx.Users.Where(u => u.ID == vm.ID).FirstOrDefault<User>();
+                user.Password = StringUtils.Md5(vm.NewPassword);
+                ctx.SaveChanges();
+                ViewBag.ErrorMsg = "Change Password success!!!";
+                return View(CurrentContext.GetCurUser());
+            }
         }
     }
 }

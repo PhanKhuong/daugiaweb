@@ -10,5 +10,8 @@ namespace AuctionWeb.Models
         public string f_Username { get; set; }
         public string f_RawPassword { get; set; }
         public bool Remember { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
     }
 }

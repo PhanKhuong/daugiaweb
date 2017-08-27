@@ -19,6 +19,8 @@ namespace AuctionWeb.Models
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string NewPassword { get; set; }
+        public string NewPasswordAgain { get; set; }
         public Nullable<int> Permission { get; set; }
         public string Name { get; set; }
         public System.DateTime DOB { get; set; }

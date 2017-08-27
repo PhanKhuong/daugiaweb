@@ -31,6 +31,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EditDes">
+      <EntityTypeMapping TypeName="AuctionSiteDBModel.EditDe">
+        <MappingFragment StoreEntitySet="EditDes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="IDPro" ColumnName="IDPro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Evalutions">
       <EntityTypeMapping TypeName="AuctionSiteDBModel.Evalution">
         <MappingFragment StoreEntitySet="Evalutions">
@@ -77,7 +87,6 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Bought" ColumnName="Bought" />
           <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
-          <ScalarProperty Name="PlusTime" ColumnName="PlusTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

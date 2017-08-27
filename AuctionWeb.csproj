@@ -662,6 +662,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditDe.cs">
+      <DependentUpon>AuctionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Evalution.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
@@ -720,6 +723,9 @@
     <Content Include="Views\MCategories\Index.cshtml" />
     <Content Include="Views\Auction\Index.cshtml" />
     <Content Include="Views\MAccount\Accept.cshtml" />
+    <Content Include="Views\MProduct\EditDes.cshtml" />
+    <Content Include="Views\Account\ChangeInfo.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

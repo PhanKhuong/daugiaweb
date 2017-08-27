@@ -26,14 +26,18 @@
         <tr>
             <th>Name</th>
             <th>Position</th>
-            <th>Office</th>
+            <th>Details</th>
+            <th>Description</th>
+            <th>Edit Description</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>Name</th>
             <th>Position</th>
-            <th>Office</th>
+            <th>Details</th>
+            <th>Description</th>
+            <th>Edit Description</th>
         </tr>
     </tfoot>
     <tbody>
@@ -45,6 +49,14 @@
                 <td>
                     <a href="@Url.Action("Details", "Products", new {id = @p.ID })" class=" btn btn-success" role="button">
                         Details
+                    </a>
+                </td>
+                <td>
+                    @Html.Raw(HttpUtility.HtmlDecode(p.Description))
+                </td>
+                <td>
+                    <a href="@Url.Action("EditDes", "MProduct", new {id = @p.ID })" class=" btn btn-success" role="button">
+                        Edit
                     </a>
                 </td>
             </tr>

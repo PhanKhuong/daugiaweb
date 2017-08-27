@@ -33,6 +33,15 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="EditDes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="4000" />
+          <Property Name="IDPro" Type="int" />
+        </EntityType>
         <EntityType Name="Evalutions">
           <Key>
             <PropertyRef Name="ID" />
@@ -81,7 +90,6 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Bought" Type="bit" />
           <Property Name="PriceDisplay" Type="money" />
-          <Property Name="PlusTime" Type="int" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -122,6 +130,7 @@
           <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EditDes" EntityType="Self.EditDes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evalutions" EntityType="Self.Evalutions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FavoriteProducts" EntityType="Self.FavoriteProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoryPrice" EntityType="Self.HistoryPrice" Schema="dbo" store:Type="Tables" />
@@ -162,6 +171,15 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EditDe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EditDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Content" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IDPro" Type="Int32" />
         </EntityType>
         <EntityType Name="Evalution">
           <Key>
@@ -211,7 +229,6 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Bought" Type="Boolean" />
           <Property Name="PriceDisplay" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="PlusTime" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductsInCharge">
           <Key>
@@ -252,6 +269,7 @@
           <EntitySet Name="Auctions" EntityType="Self.Auction" />
           <EntitySet Name="BannedUsers" EntityType="Self.BannedUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="EditDes" EntityType="Self.EditDe" />
           <EntitySet Name="Evalutions" EntityType="Self.Evalution" />
           <EntitySet Name="FavoriteProducts" EntityType="Self.FavoriteProduct" />
           <EntitySet Name="HistoryPrices" EntityType="Self.HistoryPrice" />
@@ -293,6 +311,16 @@
               <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EditDes">
+            <EntityTypeMapping TypeName="AuctionSiteDBModel.EditDe">
+              <MappingFragment StoreEntitySet="EditDes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="IDPro" ColumnName="IDPro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -342,7 +370,6 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Bought" ColumnName="Bought" />
                 <ScalarProperty Name="PriceDisplay" ColumnName="PriceDisplay" />
-                <ScalarProperty Name="PlusTime" ColumnName="PlusTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

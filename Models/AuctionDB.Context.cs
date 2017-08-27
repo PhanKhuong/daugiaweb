@@ -28,6 +28,7 @@ namespace AuctionWeb.Models
         public virtual DbSet<Auction> Auctions { get; set; }
         public virtual DbSet<BannedUser> BannedUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<EditDe> EditDes { get; set; }
         public virtual DbSet<Evalution> Evalutions { get; set; }
         public virtual DbSet<FavoriteProduct> FavoriteProducts { get; set; }
         public virtual DbSet<HistoryPrice> HistoryPrices { get; set; }

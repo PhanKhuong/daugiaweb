@@ -8,9 +8,11 @@ namespace AuctionWeb.Models
     public class ProductVM
     {
         public int ID { get; set; }
+        public int IDMain { get; set; }
         public int IDCat { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Descriptionchanges { get; set; }
         public Nullable<decimal> StartPrice { get; set; }
         public Nullable<decimal> StepPrice { get; set; }
         public Nullable<decimal> EndPrice { get; set; }
@@ -22,5 +24,10 @@ namespace AuctionWeb.Models
         public Nullable<decimal> CurrentPrice { get; set; }
         public int UserID { get; set; }
         public Nullable<bool> Bought { get; set; }
+        public Nullable<decimal> PriceDisplay { get; set; }
+        public Nullable<int> PlusTime { get; set; }
+        public int SellTime { get; set; }
+        public System.TimeSpan maintime { get; set; }
+        public bool IsExtended { get; set; }
     }
 }
