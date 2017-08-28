@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AuctionWeb.Models;
+using AuctionWeb.Helpers;
 
 namespace AuctionWeb.Controllers
 {
@@ -38,7 +39,10 @@ namespace AuctionWeb.Controllers
                 var model = ctx.Products
                     .Where(p => p.ID == id)
                     .FirstOrDefault();
-
+                //check ban
+                int iduser = CurrentContext.GetCurUser().ID;
+                var checkbanned = ctx.BannedUsers.Any(p => p.IDProduct == id && p.IDUser == iduser);
+                ViewBag.CheckBanned = checkbanned;
                 return View(model);
             }
         }

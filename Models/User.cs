@@ -26,7 +26,7 @@ namespace AuctionWeb.Models
         public double positivePoint { get; set; }
         public Nullable<System.DateTime> AskingDate { get; set; }
         public Nullable<bool> IsBargain { get; set; }
-        public string NewPasswordAgain { get; set; }
         public string NewPassword { get; set; }
+        public string NewPasswordAgain { get; set; }
     }
 }

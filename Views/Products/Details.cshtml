@@ -103,10 +103,10 @@ else
                     double pos = CurrentContext.GetCurUser().positivePoint;
                     double nav = CurrentContext.GetCurUser().negativePoint;
                     if (((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
-                    && CurrentContext.GetCurUser().ID != Model.UserID)
+                    && CurrentContext.GetCurUser().ID != Model.lastuser)
                     {
                     <hr />
-                        <form  class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction")">
+                        <form  class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction", new { Product = Model })">
                             <div class="form-group">
                                 <label class="col-sm-8 control-label">How much you could you pay for it?</label>
                                 <div class="col-sm-4">
@@ -121,50 +121,59 @@ else
                                    
                                     <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
                                 </div>
-                            </div>                          
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
-                                    <!---->
-                                    <div id="output"></div>
+                            </div>  
+                            @if (ViewBag.CheckBanned == true)
+                            {
+                                <div class="alert alert-warning">
+                                    <strong>You have no right anymore to race for this product!!!</strong>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
+                                        <!---->
+                                        <div id="output"></div>
 
-                                    <div id="overlay" class="web_dialog_overlay"></div>
+                                        <div id="overlay" class="web_dialog_overlay"></div>
 
-                                    <div id="dialog" class="web_dialog">
-                                        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
-                                            <tr>
-                                                <td class="web_dialog_title">Confrimation</td>
-                                                <td class="web_dialog_title align_right">
-                                                    <a href="#" id="btnClose">Close</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="padding-left: 15px;">
-                                                    <b>Click yes to confirm again??</b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>                                     
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="text-align: center;">
-                                                    <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div id="dialog" class="web_dialog">
+                                            <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+                                                <tr>
+                                                    <td class="web_dialog_title">Confrimation</td>
+                                                    <td class="web_dialog_title align_right">
+                                                        <a href="#" id="btnClose">Close</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding-left: 15px;">
+                                                        <b>Click yes to confirm again??</b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align: center;">
+                                                        <input id="btnSubmit" href="javascript:;" class=" btn btn-success edituser" type="button" value="Yes" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!---->
                                     </div>
-                                    <!---->
-                                </div>                               
-                            </div>
+                                </div>
+                            }                         
                         </form>
                 }
                 else

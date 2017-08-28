@@ -15,11 +15,11 @@
   </EntityType>
   <EntityType Name="BannedUsers">
     <Key>
-      <PropertyRef Name="IDProduct" />
-      <PropertyRef Name="IDUser" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="IDProduct" Type="int" Nullable="false" />
-    <Property Name="IDUser" Type="int" Nullable="false" />
+    <Property Name="IDProduct" Type="int" />
+    <Property Name="IDUser" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -111,6 +111,8 @@
     <Property Name="positivePoint" Type="float" Nullable="false" />
     <Property Name="AskingDate" Type="datetime" />
     <Property Name="IsBargain" Type="bit" />
+    <Property Name="NewPassword" Type="varchar" MaxLength="100" />
+    <Property Name="NewPasswordAgain" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="UsersAsking">
     <Key>

@@ -14,7 +14,8 @@ namespace AuctionWeb.Models
     
     public partial class BannedUser
     {
-        public int IDProduct { get; set; }
-        public int IDUser { get; set; }
+        public Nullable<int> IDProduct { get; set; }
+        public Nullable<int> IDUser { get; set; }
+        public int ID { get; set; }
     }
 }

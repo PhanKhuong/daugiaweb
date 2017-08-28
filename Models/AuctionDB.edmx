@@ -20,11 +20,11 @@
         </EntityType>
         <EntityType Name="BannedUsers">
           <Key>
-            <PropertyRef Name="IDProduct" />
-            <PropertyRef Name="IDUser" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="IDProduct" Type="int" Nullable="false" />
-          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="IDProduct" Type="int" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -116,6 +116,8 @@
           <Property Name="positivePoint" Type="float" Nullable="false" />
           <Property Name="AskingDate" Type="datetime" />
           <Property Name="IsBargain" Type="bit" />
+          <Property Name="NewPassword" Type="varchar" MaxLength="100" />
+          <Property Name="NewPasswordAgain" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="UsersAsking">
           <Key>
@@ -161,11 +163,11 @@
         </EntityType>
         <EntityType Name="BannedUser">
           <Key>
-            <PropertyRef Name="IDProduct" />
-            <PropertyRef Name="IDUser" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="IDProduct" Type="Int32" Nullable="false" />
-          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -257,6 +259,8 @@
           <Property Name="positivePoint" Type="Double" Nullable="false" />
           <Property Name="AskingDate" Type="DateTime" Precision="3" />
           <Property Name="IsBargain" Type="Boolean" />
+          <Property Name="NewPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NewPasswordAgain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UsersAsking">
           <Key>
@@ -307,6 +311,7 @@
               <MappingFragment StoreEntitySet="BannedUsers">
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -401,6 +406,8 @@
                 <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
                 <ScalarProperty Name="AskingDate" ColumnName="AskingDate" />
                 <ScalarProperty Name="IsBargain" ColumnName="IsBargain" />
+                <ScalarProperty Name="NewPassword" ColumnName="NewPassword" />
+                <ScalarProperty Name="NewPasswordAgain" ColumnName="NewPasswordAgain" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

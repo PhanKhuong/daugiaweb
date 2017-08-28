@@ -20,6 +20,7 @@
         <MappingFragment StoreEntitySet="BannedUsers">
           <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
           <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -114,6 +115,8 @@
           <ScalarProperty Name="positivePoint" ColumnName="positivePoint" />
           <ScalarProperty Name="AskingDate" ColumnName="AskingDate" />
           <ScalarProperty Name="IsBargain" ColumnName="IsBargain" />
+          <ScalarProperty Name="NewPassword" ColumnName="NewPassword" />
+          <ScalarProperty Name="NewPasswordAgain" ColumnName="NewPasswordAgain" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

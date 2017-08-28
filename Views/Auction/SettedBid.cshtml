@@ -27,7 +27,7 @@
             <th>Time</th>
             <th>Name Of User</th>
             <th>Bid</th>
-            <Ban>Ban</Ban>
+            <th>Ban</th>
         </tr>
     </thead>
     <tfoot>
@@ -35,7 +35,7 @@
             <th>Time</th>
             <th>Name Of User</th>
             <th>Bid</th>
-            <Ban>Ban</Ban>
+            <th>Ban</th>
     </tfoot>
     <tbody>
         @foreach (var p in Model)
@@ -44,6 +44,11 @@
                 <td>@p.Time</td>
                 <td>@p.Fullname</td>
                 <td>@string.Format("{0:N0}", p.MaxPrice)</td>
+                <td>
+                    <a href="@Url.Action("BanUser", "Auction", new {iduser = @p.IDUser, idpro = @p.IDPro })" class=" btn btn-success" role="button">
+                        Kick this user
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
