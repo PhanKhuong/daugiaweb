@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AuctionWeb.Models;
 using AuctionWeb.Helpers;
+using System.Text;
 
 namespace AuctionWeb.Controllers
 {
@@ -22,7 +23,7 @@ namespace AuctionWeb.Controllers
                 var user = CurrentContext.GetCurUser();
                 var pro = ctx.Products.Where(p => p.ID == vm.ID).FirstOrDefault<Product>();
                 //check if user just set a price for a product
-                if(pro.lastuser != CurrentContext.GetCurUser().ID
+                if (pro.lastuser != CurrentContext.GetCurUser().ID
                    && (vm.Price >= pro.PriceDisplay + pro.StepPrice))
                 {
                     //check if each product has been setted a price once time
@@ -71,9 +72,31 @@ namespace AuctionWeb.Controllers
                 else
                 {
                     ViewBag.info = "You just nailled a price for it";
-                }               
+                }
             }
-            return RedirectToAction("Details", "Products", new {id = vm.ID});
+            return RedirectToAction("Details", "Products", new { id = vm.ID });
+        }
+        // GET: Auction/SettedBid
+        public ActionResult SettedBid(Product vm)
+        {
+            using (var ctx = new AuctionSiteDBEntities())
+            {
+                var list = ctx.Auctions.Where(u => u.IDPro == vm.ID).ToList();
+                //
+                foreach (var item in list)
+                {
+                    if (item.own == false)
+                    {
+                        string temp = new string('*', item.Fullname.Count());
+                        var aStringBuilder = new StringBuilder(temp);
+                        aStringBuilder.Replace('*', item.Fullname[item.Fullname.Length - 1], temp.Count() - 1, 1);
+                        item.Fullname = aStringBuilder.ToString();
+                    }
+                    var hm = new DateTime(item.Time.Value.Year, item.Time.Value.Month, item.Time.Value.Day, item.Time.Value.Hour, item.Time.Value.Minute, 0);
+                    item.Time = hm;
+                }
+                return View(list);
+            }            
         }
     }
 }

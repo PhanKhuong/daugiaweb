@@ -102,7 +102,8 @@ else
                 {
                     double pos = CurrentContext.GetCurUser().positivePoint;
                     double nav = CurrentContext.GetCurUser().negativePoint;
-                    if ((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
+                    if (((Math.Abs(pos / (nav + pos)) > ((double)4 / (double)5)) || (pos > 0 && nav == 0))
+                    && CurrentContext.GetCurUser().ID != Model.UserID)
                     {
                     <hr />
                         <form  class="form-inline submit_edituser" method="get" action="@Url.Action("Index","Auction")">
@@ -120,7 +121,7 @@ else
                                    
                                     <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
                                 </div>
-                            </div>
+                            </div>                          
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button id="btnShowModal" value="Modal Dialog" type="submit" class="btn btn-success">Grab it</button>
@@ -132,7 +133,7 @@ else
                                     <div id="dialog" class="web_dialog">
                                         <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
                                             <tr>
-                                                <td class="web_dialog_title">Online Survey</td>
+                                                <td class="web_dialog_title">Confrimation</td>
                                                 <td class="web_dialog_title align_right">
                                                     <a href="#" id="btnClose">Close</a>
                                                 </td>
@@ -143,7 +144,7 @@ else
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left: 15px;">
-                                                    <b>@recommend for this stuff????</b>
+                                                    <b>Click yes to confirm again??</b>
                                                 </td>
                                             </tr>
                                             <tr>

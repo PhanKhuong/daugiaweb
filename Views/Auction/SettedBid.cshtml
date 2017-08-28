@@ -1,0 +1,50 @@
+﻿@using AuctionWeb.Models
+
+@model List<Auction>
+
+@section view_title{
+    Setted bid history
+}
+
+@section js {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#availablepros').DataTable();
+        });
+    </script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery-1.12.4.js"></script>
+    <script src="~/Assets/boostrap-datepicker/js/jquery.dataTabsles.min.js"></script>
+}
+
+@section css {
+    <link href="~/Assets/boostrap-datepicker/css/d.css" rel="stylesheet" />
+}
+
+
+<table id="availablepros" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Name Of User</th>
+            <th>Bid</th>
+            <Ban>Ban</Ban>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Time</th>
+            <th>Name Of User</th>
+            <th>Bid</th>
+            <Ban>Ban</Ban>
+    </tfoot>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Time</td>
+                <td>@p.Fullname</td>
+                <td>@string.Format("{0:N0}", p.MaxPrice)</td>
+            </tr>
+        }
+    </tbody>
+</table>

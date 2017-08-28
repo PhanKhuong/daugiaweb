@@ -726,6 +726,7 @@
     <Content Include="Views\MProduct\EditDes.cshtml" />
     <Content Include="Views\Account\ChangeInfo.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Auction\SettedBid.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -25,8 +25,9 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Position</th>
+            <th>Image</th>
             <th>Details</th>
+            <th>Setted Price</th>
             <th>Description</th>
             <th>Edit Description</th>
         </tr>
@@ -34,8 +35,9 @@
     <tfoot>
         <tr>
             <th>Name</th>
-            <th>Position</th>
+            <th>Image</th>
             <th>Details</th>
+            <th>Setted Price</th>
             <th>Description</th>
             <th>Edit Description</th>
         </tr>
@@ -49,6 +51,11 @@
                 <td>
                     <a href="@Url.Action("Details", "Products", new {id = @p.ID })" class=" btn btn-success" role="button">
                         Details
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("SettedBid", "Auction", new {id = @p.ID })" class=" btn btn-success" role="button">
+                        Setted Bid
                     </a>
                 </td>
                 <td>
