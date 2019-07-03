@@ -122,7 +122,7 @@ else
                                     <input type="text" value="@Model.ID" placeholder="VND" name="ID" hidden>
                                 </div>
                             </div>  
-                            @if (ViewBag.CheckBanned == true)
+                            @if (ViewBag.CheckBanned == true && CurrentContext.Islogged() == true)
                             {
                                 <div class="alert alert-warning">
                                     <strong>You have no right anymore to race for this product!!!</strong>

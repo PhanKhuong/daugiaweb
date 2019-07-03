@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AuctionWeb.Models;
 using AuctionWeb.Helpers;
+using System.Data.Entity.Core.Objects;
 
 namespace AuctionWeb.Controllers
 {
@@ -13,16 +14,30 @@ namespace AuctionWeb.Controllers
         // GET: Products/ByCat
         public ActionResult ByCat(int? id)
         {
-            if(id.HasValue == false)
+
+            if (id.HasValue == false)
             {
                 return RedirectToAction("Index", "Home");
             }
 
             using (var ctx = new AuctionSiteDBEntities())
             {
+                //check expired
+                var listpros = ctx.Products.Where(p => (DateTime.Now > System.Data.Entity.DbFunctions.AddDays(p.TimePost, p.IntervalTime)))
+                    .ToList();
+                ctx.Products.RemoveRange(listpros);
+                ctx.SaveChanges();
                 var list = ctx.Products.Where(p => p.IDCat == id)
                     .ToList();
-                return View(list);
+                //check if no product is found because all of them have been deleted at check expired
+                if(list.Count > 0)
+                {
+                    return View(list);
+                }
+                else
+                {
+                    return View(model:null);
+                }
             }
         }
 
@@ -39,11 +54,14 @@ namespace AuctionWeb.Controllers
                 var model = ctx.Products
                     .Where(p => p.ID == id)
                     .FirstOrDefault();
-                //check ban
-                int iduser = CurrentContext.GetCurUser().ID;
-                var checkbanned = ctx.BannedUsers.Any(p => p.IDProduct == id && p.IDUser == iduser);
-                ViewBag.CheckBanned = checkbanned;
-                return View(model);
+                //check band
+                if (CurrentContext.Islogged() == true)
+                {
+                    int iduser = CurrentContext.GetCurUser().ID;
+                    var checkbanned = ctx.BannedUsers.Any(p => p.IDProduct == id && p.IDUser == iduser);
+                    ViewBag.CheckBanned = checkbanned;
+                }
+                    return View(model);
             }
         }
     }
